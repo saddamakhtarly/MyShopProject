@@ -14,21 +14,21 @@ namespace MyShop
         {
             InitializeComponent();
 
-            string username = Preferences.Get("Username", "");
-            GlobalVariables.user_role = Preferences.Get("UserRole", 0);
-            GlobalVariables.user_id = Preferences.Get("UserId", 0);
+            //string username = Preferences.Get("Username", "");
+            //GlobalVariables.user_role = Preferences.Get("UserRole", 0);
+            //GlobalVariables.user_id = Preferences.Get("UserId", 0);
 
-            if (string.IsNullOrEmpty(username))
-            {
-                MainPage = new NavigationPage(new LoginPage());
-            }
-            else
-            {
-                MainPage = new HomePage();
-                GlobalVariables.username = username;
-            }
+            //if (string.IsNullOrEmpty(username))
+            //{
+            //    MainPage = new NavigationPage(new LoginPage());
+            //}
+            //else
+            //{
+            //    MainPage = new HomePage();
+            //    GlobalVariables.username = username;
+            //}
 
-
+            MainPage =new NavigationPage( new ApiLoginPage());
 
 
             //GlobalVariables.conn = DependencyService.Get<ISQLIte>().GetConnection();
