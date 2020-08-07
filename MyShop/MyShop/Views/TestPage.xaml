@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" BackgroundColor="White" NavigationPage.HasNavigationBar="False"
+             x:Class="MyShop.Views.TestPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="70*"/>
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0" Padding="0">
+                    <StackLayout Padding="5" Orientation="Horizontal">
+                        <Label Margin="10,0,0,0" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="25">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Genie " TextColor="Black"/>
+                                    <Span Text="ERP" TextColor="Orange"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Image Source="cartIcon.png" WidthRequest="25" HeightRequest="25" Grid.Row="0" Grid.Column="1" HorizontalOptions="EndAndExpand" Margin="0,0,10,0"/>
+                        <Image Source="aboutIcon.png" WidthRequest="25" HeightRequest="25" Grid.Row="0" Grid.Column="2" HorizontalOptions="End" Margin="0,0,5,0"/>
+                    </StackLayout>
+                </Frame>
+                <ScrollView Grid.Row="1">
+                    <Grid Padding="10" RowSpacing="30" Margin="0,30,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="25*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="0" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Sales" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="1" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Customers" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="2" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Appointments" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="0" Grid.Column="3" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Purchase" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="0" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Suppliers" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="1" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Stock" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="2" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Accounts" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="1" Grid.Column="3" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Production" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="2" Grid.Column="0" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Status" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="2" Grid.Column="1" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Attendance" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="2" Grid.Column="2" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Directory" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="0" BackgroundColor="Transparent" Grid.Row="2" Grid.Column="3" Padding="2">
+                            <StackLayout>
+                                <Image Source="aboutIcon.png" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="30" WidthRequest="30"/>
+                                <Label Text="Activities" HorizontalOptions="Center" TextColor="Black" FontSize="Small" LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                </ScrollView>
+                
+            </Grid>
+            <Button Grid.Row="0" Text="+" FontSize="25"
+                    BackgroundColor="Orange" BorderRadius="25" TextColor="White" HorizontalOptions="End" 
+                    WidthRequest="50" HeightRequest="50" Margin="0,0,20,22" VerticalOptions="End"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

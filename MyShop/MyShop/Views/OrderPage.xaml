@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyShop.Views.OrderPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20">
+                <Label Text="Order Summary:" FontAttributes="Bold" FontSize="Medium" TextColor="Black"></Label>
+                <StackLayout  BackgroundColor="White" Padding="20">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Total number of items:" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Center" ></Label>
+                        <Label x:Name="quantity" Text="{Binding Totalqty}" FontAttributes="Bold" FontSize="Medium"  TextColor="Red" HorizontalTextAlignment="Center"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Total Amount:" FontAttributes="Bold" TextColor="Black" HorizontalTextAlignment="Center"></Label>
+                        <Label x:Name="price"  Text="{Binding TotalPrice}" FontAttributes="Bold"  TextColor="Red" HorizontalTextAlignment="Center"></Label>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Your Address :" FontSize="15" HorizontalTextAlignment="Center" TextColor="Black" FontAttributes="Bold"/>
+                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal" >
+                        <Label x:Name="HouseNo" Text="{Binding HomeNo}"  TextColor="Black"/>
+                        <Label x:Name="Street" Text="{Binding Street}" TextColor="Black"/>
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal" >
+                        <Label x:Name="City" Text="{Binding City}" TextColor="Black"/>
+                        <Label x:Name="State" Text="{Binding State}" TextColor="Black"/>
+                        <Label x:Name="Pin" Text="{Binding PinCode}" TextColor="Black"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <!--<Label Text="Payment Information:" FontAttributes="Bold" FontSize="Medium" TextColor="Black"></Label>
+                <StackLayout  BackgroundColor="White" Padding="20" HorizontalOptions="FillAndExpand">
+                   
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="RazerPay" Command="{Binding RazerPaybtnClicked}" Clicked="RazerPay_Clicked" Image="radiobtnunchecked.png" Text="  Pay Pal" TextColor="Black" BackgroundColor="Transparent"  FontAttributes="Bold"  VerticalOptions="Center"/>
+                        <Image Source="paypal.png" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="Cod" Command="{Binding CodbtnClicked}" Clicked="Cod_Clicked" Image="radiobtnunchecked.png" Text="  Cash On Delivery" TextColor="Black"  BackgroundColor="Transparent" FontAttributes="Bold"  VerticalOptions="Center"/>
+                        <Image Source="cod.png" VerticalOptions="Center"/>
+                    </StackLayout>
+                </StackLayout>-->
+                <Button  Text="Confirm Order" Command="{Binding ConfirmOrder}" BackgroundColor="#2DCA71"  HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

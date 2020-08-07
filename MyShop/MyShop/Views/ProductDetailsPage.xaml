@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyShop.Views.ProductDetailsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding ProductTitle}" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" />
+            <CarouselView x:Name="slider" IsScrollAnimated="True" HeightRequest="250"
+                          HorizontalOptions="FillAndExpand" ItemsSource="{Binding Images}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding ImageURL}" Aspect="AspectFill"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Label Text="{Binding Price}" FontAttributes="Bold" FontSize="Large"/>
+            <Label Text="{Binding Description}"/>
+            <Entry Placeholder="Quantity" Keyboard="Numeric" Text="{Binding Quantity}"/>
+            <Button Text="Add To cart" Command="{Binding AddToCart}"/>
+            <Button Text="Buy Now" Command="{Binding BuyNow}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

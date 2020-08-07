@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:MyShop.Renderer"
+             mc:Ignorable="d"
+             x:Class="MyShop.Views.LoginPage">
+    <ContentPage.Content>
+       
+        <Grid RowSpacing="0" BackgroundColor="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" BackgroundColor="Beige">
+                <Image Source="blacklogocopy.png" Scale="0.6" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Grid>
+            <ScrollView  Grid.Row="1">
+                <Grid >
+                    <StackLayout Padding="20,25,20,20" Spacing="2">
+                        <Label Text="Sign In"  HorizontalOptions="Center" FontSize="25" Style="{StaticResource BoldFontLabel}"/>
+                        <Label Text="Enter Your Login Details" HorizontalOptions="Center" FontSize="18" Style="{StaticResource MediumFontLabel}"/>
+                        <local:LoginEntry x:Name="txtUsername" Margin="0,15,0,0" Placeholder="Username" Style="{StaticResource MediumFontEntry}" Text="{Binding Username}"/>
+                        <local:LoginEntry x:Name="txtPassword" Margin="0,15,0,0" Placeholder="Password" IsPassword="True" Style="{StaticResource MediumFontEntry}" Text="{Binding Password}"/>
+                        <Button Text="Sign In" x:Name="btnsignin" CornerRadius="10" Margin="0,15,0,0" Command="{Binding LoginClicked}"
+                            TextColor="White" BackgroundColor="#ec38a3" Style="{StaticResource MediumFontButton}"/>
+                        <Label Text="Forgot Password?"  HorizontalOptions="Center" Margin="0,15,0,0" FontSize="18" Style="{StaticResource BoldFontLabel}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordClicked}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label Text="Or" Opacity="0.5"  HorizontalOptions="Center" Margin="0,15,0,0" FontSize="18" Style="{StaticResource LightFontLabel}"/>
+                        <Label HorizontalOptions="Center" Margin="0,15,0,0" FontSize="18" Style="{StaticResource BoldFontLabel}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Don't have an account?" />
+                                    <Span Text="Click here" TextColor="#ec38a3" >
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SignupClicked}"/>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyShop.Views.ShippingAddressPage">
+    <ContentPage.Content>
+        <StackLayout Padding ="0,30,0,0" >
+            <StackLayout BackgroundColor="Azure" >
+                <StackLayout Orientation="Horizontal" >
+                    <Label FontAttributes="Bold" Text="FullName" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Text="{Binding FullName}" Placeholder="Required" WidthRequest="300"  />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="MobileNumber" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Required" WidthRequest="300" Text="{Binding MobileNumber}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="PinCode" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Required" WidthRequest="300" Text="{Binding PinCode}"  />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="HouseNo" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Required" WidthRequest="300" Text="{Binding HouseNo}"   />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="StreetNo" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Required" WidthRequest="300" Text="{Binding StreetNo}"  />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="Area" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Required" WidthRequest="300" Text="{Binding Area}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="Landmark" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Required" WidthRequest="300" Text="{Binding Landmark}" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="City" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Entry Placeholder="Enter City" x:Name="Cities" Text="{Binding City}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="State" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Picker Title="Select State" x:Name="states" ItemDisplayBinding="{Binding Name}" ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
+                    <Label FontAttributes="Bold" Text="Country" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
+                    <Picker Title="Select Country" x:Name="Countries" ItemDisplayBinding="{Binding Name}" ItemsSource="{Binding Countries}"
+                            SelectedItem="{Binding SelectedCountry}"/>
+                </StackLayout>
+                <Button Text="Proceed To Check Out" Command="{Binding SaveAddress}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

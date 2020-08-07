@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyShop.Views.UploadProductImagePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Padding="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.Column="0" HeightRequest="200" Source="{Binding ImageUrl1,Mode=TwoWay}"
+                       HorizontalOptions="Fill" />
+                <Button Text="Upload" Grid.Row="1" Grid.Column="0" Command="{Binding CaptureImage}" CommandParameter="1"/>
+
+                <Image Grid.Row="0" Grid.Column="1" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl2,Mode=TwoWay}"
+                       />
+                <Button Text="Upload" Grid.Row="1" Grid.Column="1" Command="{Binding CaptureImage}" CommandParameter="2"/>
+
+                <Image Grid.Row="0" Grid.Column="2" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl3,Mode=TwoWay}"
+                       />
+                <Button Text="Upload" Grid.Row="1" Grid.Column="2" Command="{Binding CaptureImage}" CommandParameter="3"/>
+
+                <Image Grid.Row="2" Grid.Column="0" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl4,Mode=TwoWay}"
+                       />
+                <Button Text="Upload" Grid.Row="3" Grid.Column="0" Command="{Binding CaptureImage}" CommandParameter="4"/>
+
+                <Image Grid.Row="2" Grid.Column="1" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl5,Mode=TwoWay}"
+                       />
+                <Button Text="Upload" Grid.Row="3" Grid.Column="1" Command="{Binding CaptureImage}" CommandParameter="5"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

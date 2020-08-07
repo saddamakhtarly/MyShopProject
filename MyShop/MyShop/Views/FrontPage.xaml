@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:eventToCommand="clr-namespace:MyShop.Behavior"
+             mc:Ignorable="d" Title="Home"
+             xmlns:local="clr-namespace:MyShop"
+             x:Class="MyShop.Views.FrontPage">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <SearchBar Text="{Binding SearchText}" x:Name="searchBar" >
+                <SearchBar.Behaviors>
+                    <eventToCommand:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchData}"/>
+                    <eventToCommand:EventToCommandBehavior EventName="SearchButtonPressed" Command="{Binding SearchBtnPress}"/>
+                </SearchBar.Behaviors>
+            </SearchBar>
+            <Label Text="No data found!" HorizontalOptions="Center" FontSize="Medium" 
+                   TextColor="Gray" IsVisible="{Binding IsVisibleStatus}" Margin="10" x:Name="status"/>
+            
+
+            <CarouselView x:Name="slider" IsScrollAnimated="True" HeightRequest="250"
+                          HorizontalOptions="FillAndExpand" ItemsSource="{Binding SliderImages,Mode=TwoWay}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding URL}" Aspect="AspectFill"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding CategoryData}" HeightRequest="50" SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
+                             SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" TextColor="Black"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" SelectedItem="{Binding SelectedProduct,Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView BackgroundColor="White">
+                                <Grid Padding="10" RowSpacing="0" VerticalOptions="Start">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="{Binding ThumbnailURL}" 
+                                    WidthRequest="100" HeightRequest="100" Aspect="AspectFit" 
+                                    Grid.RowSpan="3" Grid.Column="0"/>
+                                    <Label Text="{Binding Name}"  Grid.Row="0" Grid.Column="1" FontSize="20" TextColor="Black"/>
+                                    <Label Text="{Binding Description}" Grid.Row="1" Grid.Column="1" FontSize="16" MaxLines="2" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding SellPrice}" Grid.Row="2" Grid.Column="1"  FontSize="18" FontAttributes="Bold" TextColor="Orange"/>
+                                </Grid>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MyShop.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BoldFontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Poppins-Bold.ttf#Poppins-Bold"/>
+            </Style>
+            <Style x:Key="LightFontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Poppins-Light.ttf#Poppins-Light"/>
+            </Style>
+            <Style x:Key="MediumFontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Poppins-Medium.ttf#Poppins-Medium"/>
+            </Style>
+            <Style x:Key="RegularFontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Poppins-Regular.ttf#Poppins-Regular"/>
+            </Style>
+
+            <Style x:Key="SemiBoldFontLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Poppins-SemiBold.ttf#Poppins-SemiBold"/>
+            </Style>
+
+
+            <Style x:Key="BoldFontEntry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="Poppins-Bold.ttf#Poppins-Bold"/>
+            </Style>
+            <Style x:Key="LightFontEntry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="Poppins-Light.ttf#Poppins-Light"/>
+            </Style>
+            <Style x:Key="MediumFontEntry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="Poppins-Medium.ttf#Poppins-Medium"/>
+            </Style>
+            <Style x:Key="RegularFontEntry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="Poppins-Regular.ttf#Poppins-Regular"/>
+            </Style>
+
+            <Style x:Key="SemiBoldFontEntry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="Poppins-SemiBold.ttf#Poppins-SemiBold"/>
+            </Style>
+
+
+            <Style x:Key="BoldFontButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="Poppins-Bold.ttf#Poppins-Bold"/>
+            </Style>
+            <Style x:Key="LightFontButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="Poppins-Light.ttf#Poppins-Light"/>
+            </Style>
+            <Style x:Key="MediumFontButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="Poppins-Medium.ttf#Poppins-Medium"/>
+            </Style>
+            <Style x:Key="RegularFontButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="Poppins-Regular.ttf#Poppins-Regular"/>
+            </Style>
+            <Style x:Key="SemiBoldFontButton" TargetType="Button">
+                <Setter Property="FontFamily" Value="Poppins-SemiBold.ttf#Poppins-SemiBold"/>
+            </Style>
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
