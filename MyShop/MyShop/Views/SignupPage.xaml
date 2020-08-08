@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:local="clr-namespace:MyShop.Renderer"
+             x:Class="MyShop.Views.SignupPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Grid.Column="0" ImageSource="icons8back.png" HeightRequest="50" WidthRequest="50"
+                   x:Name="btnback" CornerRadius="10" Command="{Binding BackClicked}"
+                            TextColor="White" BackgroundColor="#ec38a3" Style="{StaticResource MediumFontButton}"/>
+                <Label Text=" Back To login"   Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                   FontSize="18" Style="{StaticResource BoldFontLabel}"  TextColor="White"/>
+
+            </Grid>
+            <yummy:PancakeView CornerRadius="50,50,0,0" Padding="0" BackgroundColor="White" Grid.Row="1"  >
+                <StackLayout Padding="20,25,20,20" Spacing="2">
+
+                    <Label Text="Sign Up"  HorizontalOptions="Center" FontSize="25" Style="{StaticResource BoldFontLabel}"/>
+                    <Label Text="Enter all the details" HorizontalOptions="Center" FontSize="18" Style="{StaticResource MediumFontLabel}"/>
+                    <local:LoginEntry x:Name="txtName" Margin="0,15,0,0" Placeholder="Name" Style="{StaticResource MediumFontEntry}" Text="{Binding Name}"/>
+                    <local:LoginEntry x:Name="txtEmail" Margin="0,15,0,0" Placeholder="Email" Style="{StaticResource MediumFontEntry}" Text="{Binding Email}"/>
+                    <local:LoginEntry x:Name="txtMobile" Margin="0,15,0,0" Placeholder="Mobile" Style="{StaticResource MediumFontEntry}" Text="{Binding Mobile}"/>
+                    <local:LoginEntry x:Name="txtPassword" Margin="0,15,0,0" Placeholder="Password" IsPassword="True" Style="{StaticResource MediumFontEntry}" Text="{Binding Password}"/>
+                    <local:LoginEntry x:Name="txtConfirmPassword" Margin="0,15,0,0" Placeholder="Confirm Password" IsPassword="True" Style="{StaticResource MediumFontEntry}" Text="{Binding ConfirmPassword}"/>
+                    <Button Text="Submit" x:Name="btnsubmit" CornerRadius="10" Margin="0,15,0,0" Command="{Binding SubmitClicked}"
+                            TextColor="White" BackgroundColor="#ec38a3" Style="{StaticResource MediumFontButton}"/>
+                    <Grid>
+                    </Grid>
+                </StackLayout>
+            </yummy:PancakeView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

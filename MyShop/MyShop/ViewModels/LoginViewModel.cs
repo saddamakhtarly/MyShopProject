@@ -59,7 +59,7 @@ namespace MyShop.ViewModels
             {
                 return new Command(() =>
                 {
-                    //Navigation.PushAsync(new SignupPage());
+                    Navigation.PushAsync(new SignupPage());
                 });
 
             }

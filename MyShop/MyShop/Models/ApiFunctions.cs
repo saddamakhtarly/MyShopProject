@@ -10,7 +10,7 @@ namespace MyShop.Models
 {
     public class ApiFunctions
     {
-        public async Task<ApiLoginResponce> apilogin(string username,string pass)
+        public async Task<ApiLoginResponce> apilogin(string username, string pass)
         {
             var handler = new HttpClientHandler();
             handler.UseCookies = false;
@@ -21,7 +21,7 @@ namespace MyShop.Models
                 {
                     request.Headers.TryAddWithoutValidation("Cookie", "ARRAffinity=9f76b54f03145f3a2973c78876ae5d8ec0437e55210a9a68758a05c81f2d2a74");
 
-                    request.Content = new StringContent("grant_type=password&username="+username+"&password="+pass+"&client_id=Shipmunk.Password&client_secret=secret&scope=openid coreapis profile");
+                    request.Content = new StringContent("grant_type=password&username=" + username + "&password=" + pass + "&client_id=Shipmunk.Password&client_secret=secret&scope=openid coreapis profile");
                     request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/x-www-form-urlencoded");
 
                     var response = await httpClient.SendAsync(request);
@@ -31,7 +31,7 @@ namespace MyShop.Models
             }
         }
 
-        public async Task<ApiProductResponce> apiproduct(string token)
+        public async Task<ProductResponce> apiproduct(string token)
         {
             var handler = new HttpClientHandler();
             handler.UseCookies = false;
@@ -40,12 +40,12 @@ namespace MyShop.Models
             {
                 using (var request = new HttpRequestMessage(new HttpMethod("GET"), "https://shipmunkapi.azurewebsites.net/items/products?orderBy=createdAt&orderByDir=-1&page=1&pageSize=10"))
                 {
-                    request.Headers.TryAddWithoutValidation("Authorization", "Bearer "+token);
+                    request.Headers.TryAddWithoutValidation("Authorization", "Bearer " + token);
                     request.Headers.TryAddWithoutValidation("Cookie", "ARRAffinity=9f76b54f03145f3a2973c78876ae5d8ec0437e55210a9a68758a05c81f2d2a74");
 
                     var response = await httpClient.SendAsync(request);
                     string jsonResp = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<ApiProductResponce>(jsonResp);
+                    return JsonConvert.DeserializeObject<ProductResponce>(jsonResp);
                 }
             }
         }

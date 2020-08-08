@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyShop.Models
 {
-   public class ApiProductResponce
+    public class ProductDate
     {
         public int condition { get; set; }
         public string ageLimit { get; set; }
@@ -21,5 +21,12 @@ namespace MyShop.Models
         public string icon2 { get; set; }
         public int workerId { get; set; }
         public string imageUrl { get; set; }
+    }
+    public class ProductResponce
+    {
+        public int page { get; set; }
+        public int pageSize { get; set; }
+        public int totalItems { get; set; }
+        public List<ProductDate> data { get; set; }
     }
 }
