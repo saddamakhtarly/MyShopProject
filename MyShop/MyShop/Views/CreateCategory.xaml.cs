@@ -16,7 +16,7 @@ namespace MyShop.Views
         public CreateCategory()
         {
             InitializeComponent();
-            BindingContext = new CreateCategoryViewModel();
+            BindingContext = new CreateCategoryViewModel(Navigation);
         }
     }
 }

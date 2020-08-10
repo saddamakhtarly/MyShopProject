@@ -9,9 +9,10 @@ namespace MyShop.ViewModels
 {
     public class CreateCategoryViewModel : NotifyModel
     {
-        public CreateCategoryViewModel()
+        public INavigation Navigation { get; set; }
+        public CreateCategoryViewModel(INavigation navigation)
         {
-
+            Navigation = navigation;
         }
         public Command SaveCategory
         {
@@ -28,18 +29,19 @@ namespace MyShop.ViewModels
                         if (resp.IsValid)
                         {
                             // success
-                            Application.Current.MainPage.DisplayAlert("Message", "Category Saved Successfully", "OK");
+                          await  Application.Current.MainPage.DisplayAlert("Message", "Category Saved Successfully", "OK");
                             CategoryName = "";
+                            await Navigation.PopAsync();
                         }
                         else
                         {
                             // failed
-                            Application.Current.MainPage.DisplayAlert("Message", "Category Failed To Save", "OK");
+                           await Application.Current.MainPage.DisplayAlert("Message", "Category Failed To Save", "OK");
                         }
                     }
                     else
                     {
-                        Application.Current.MainPage.DisplayAlert("Message", "Please enter category name", "OK");
+                       await Application.Current.MainPage.DisplayAlert("Message", "Please enter category name", "OK");
                     }
                 });
             }

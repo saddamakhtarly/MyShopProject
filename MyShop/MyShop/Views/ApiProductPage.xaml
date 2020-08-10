@@ -5,6 +5,29 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Command="{Binding ShowProduct}" Text="Show"/>
+            <ListView ItemsSource="{Binding Products}" HasUnevenRows="True" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid HeightRequest="70"  Margin="5" BackgroundColor="White" RowSpacing="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" HeightRequest="100" WidthRequest="100" VerticalOptions="Start" Margin="2,2,1,2" Source="{Binding imageUrl}" ></Image>
+                                <Label Grid.Row="0" Grid.Column="1" VerticalOptions="Start"  Text="{Binding name}" Margin="3" ></Label>
+                                <Label Grid.Row="0" Grid.Column="2" VerticalOptions="Start"  Text="{Binding productType}" Margin="3" ></Label>
+                                <Label Grid.Row="0" Grid.Column="3" Margin="3" Text="{Binding price}"  FontAttributes="Bold" HorizontalTextAlignment="End"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

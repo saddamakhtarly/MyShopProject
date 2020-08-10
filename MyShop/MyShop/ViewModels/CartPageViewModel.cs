@@ -63,19 +63,28 @@ namespace MyShop.ViewModels
         {
             get
             {
-                return new Command((e) =>
+                return new Command(async(e) =>
                 {
                     CartItem selectedItem = e as CartItem;
                     if (selectedItem != null)
                     {
                         selectedItem.Quantity -= 1;
+                        Cart cart = new Cart();
+                        cart.Id = selectedItem.CartId;
+                        cart.ProductId = selectedItem.ProductId;
+                        cart.Quantity = -1;
+                        cart.UserId = GlobalVariables.user_id;
+
                         if (selectedItem.Quantity <= 0)
                         {
                             CartItem.Remove(selectedItem);
+                            await new GlobalFunctions().SaveCart(cart);
                         }
                         //new DatabaseFunction().UpdateCart(selectedItem);
                         // need to update it to api,pending
+                        await new GlobalFunctions().SaveCart(cart);
                         CalculateTotalQty();
+                        PopulateCartItem();
                     }
                 });
             }
@@ -84,16 +93,23 @@ namespace MyShop.ViewModels
         {
             get
             {
-                return new Command((e) =>
+                return new Command(async(e) =>
                 {
                     CartItem selectedItem = e as CartItem;
                     if (selectedItem != null)
                     {
                         selectedItem.Quantity += 1;
+                        Cart cart = new Cart();
+                        cart.Id = selectedItem.CartId;
+                        cart.ProductId = selectedItem.ProductId;
+                        cart.Quantity = 1;
+                        cart.UserId = GlobalVariables.user_id;
+                        await new GlobalFunctions().SaveCart(cart);
                         //new DatabaseFunction().UpdateCart(selectedItem);
                         // need to update it to api,pending
                     }
                     CalculateTotalQty();
+                    PopulateCartItem();
                 });
             }
         }

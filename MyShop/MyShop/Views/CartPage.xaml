@@ -29,7 +29,7 @@
                                     <StackLayout Orientation="Horizontal"  HeightRequest="40">
                                         <Button Text="-" HeightRequest="30" WidthRequest="30" 
                                                 Command="{Binding Path=BindingContext.DecreaseQuantity,Source={x:Reference menuOption}}" CommandParameter="{Binding .}"/>
-                                        <Entry Text="{Binding Quantity,Mode=TwoWay}" HeightRequest="30"/>
+                                        <Entry Text="{Binding Quantity}" HeightRequest="30"/>
                                         <Button Text="+" HeightRequest="30" WidthRequest="30"
                                                 Command="{Binding Path=BindingContext.IncreaseQuantity,Source={x:Reference menuOption}}" CommandParameter="{Binding .}"/>
                                     </StackLayout>

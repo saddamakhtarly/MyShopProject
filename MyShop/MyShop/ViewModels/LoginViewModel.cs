@@ -23,10 +23,10 @@ namespace MyShop.ViewModels
             {
                 return new Command(async () =>
                 {
-                    if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+                    if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password))
                     {
                         LoginRequest rqst = new LoginRequest();
-                        rqst.Username = Username;
+                        rqst.Username = UserName;
                         rqst.Password = Password;
                         var resp = await new GlobalFunctions().ValidateUser(rqst);
                         GlobalVariables.user = resp;
@@ -76,7 +76,7 @@ namespace MyShop.ViewModels
             }
         }
         string _username;
-        public string Username
+        public string UserName
         {
             get
             {

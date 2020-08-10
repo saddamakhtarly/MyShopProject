@@ -16,6 +16,10 @@ namespace MyShop.Views
         public ApiProductPage()
         {
             InitializeComponent();
+            
+        }
+        protected override void OnAppearing()
+        {
             BindingContext = new ApiProductPageViewModel(Navigation);
         }
     }

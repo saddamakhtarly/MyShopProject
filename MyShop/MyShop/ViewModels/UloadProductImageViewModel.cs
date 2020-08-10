@@ -10,10 +10,12 @@ namespace MyShop.ViewModels
 {
     public class UloadProductImageViewModel : NotifyModel
     {
+        List<MediaFile> ProductImages;
         public INavigation Navigation { get; set; }
         public UloadProductImageViewModel(INavigation navigation)
         {
             Navigation = navigation;
+            ProductImages = new List<MediaFile>();
         }
 
         public Command CaptureImage
@@ -23,68 +25,92 @@ namespace MyShop.ViewModels
                 return new Command(async (e) =>
                 {
                     int index = Convert.ToInt32(e);
-                    if (await GlobalFunctions.GetCameraPermission() && await GlobalFunctions.GetStorageReadPermission() && await GlobalFunctions.GetStorageWritePermission())
+                    var actionSheet = await Application.Current.MainPage.DisplayActionSheet("Title", "Cancel", "", "Take Photo", "Choose from Gallary");
+                    if (actionSheet == "Take Photo")
                     {
-                        await CrossMedia.Current.Initialize();
-                        if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                        {
-                            await Application.Current.MainPage.DisplayAlert("No Camera", ":( No camera available.", "OK");
-                            return;
-                        }
-
-                        MediaFile file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                        {
-                            Directory = "Sample",
-                            Name = "test.jpg"
-                        });
-
-                        if (file != null)
-                        {
-                            switch (index)
-                            {
-                                case 1:
-                                    ImageUrl1 = ImageSource.FromStream(() =>
-                                    {
-                                        var stream = file.GetStream();
-                                        return stream;
-                                    });
-                                    break;
-                                case 2:
-                                    ImageUrl2 = ImageSource.FromStream(() =>
-                                    {
-                                        var stream = file.GetStream();
-                                        return stream;
-                                    });
-                                    break;
-                                case 3:
-                                    ImageUrl3 = ImageSource.FromStream(() =>
-                                    {
-                                        var stream = file.GetStream();
-                                        return stream;
-                                    });
-                                    break;
-                                case 4:
-                                    ImageUrl4 = ImageSource.FromStream(() =>
-                                    {
-                                        var stream = file.GetStream();
-                                        return stream;
-                                    });
-                                    break;
-                                case 5:
-                                    ImageUrl5 = ImageSource.FromStream(() =>
-                                    {
-                                        var stream = file.GetStream();
-                                        return stream;
-                                    });
-                                    break;
-                            }
-
-                            MessagingCenter.Send<MediaFile>(file, "ProductImage");
-                        }
+                        CaptureImages(index, 1);
+                    }
+                    else
+                    {
+                        CaptureImages(index, 2);
                     }
                 });
             }
         }
+
+        public async void CaptureImages(int index, int type)
+        {
+
+            if (await GlobalFunctions.GetCameraPermission() && await GlobalFunctions.GetStorageReadPermission() && await GlobalFunctions.GetStorageWritePermission())
+            {
+                await CrossMedia.Current.Initialize();
+                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                {
+                    await Application.Current.MainPage.DisplayAlert("No Camera", ":( No camera available.", "OK");
+                    return;
+                }
+                MediaFile file = null;
+                if (type == 1)
+                {
+                    file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                    {
+                        Directory = "Sample",
+                        Name = Guid.NewGuid().ToString() + ".jpeg"//default name or random no using guid
+                    });
+                }
+                else
+                {
+                    file = await CrossMedia.Current.PickPhotoAsync();
+                }
+
+                if (file != null)
+                {
+                    switch (index)
+                    {
+                        case 1:
+                            ImageUrl1 = ImageSource.FromStream(() =>
+                            {
+                                var stream = file.GetStream();
+                                return stream;
+                            });
+                            break;
+                        case 2:
+                            ImageUrl2 = ImageSource.FromStream(() =>
+                            {
+                                var stream = file.GetStream();
+                                return stream;
+                            });
+                            break;
+                        case 3:
+                            ImageUrl3 = ImageSource.FromStream(() =>
+                            {
+                                var stream = file.GetStream();
+                                return stream;
+                            });
+                            break;
+                        case 4:
+                            ImageUrl4 = ImageSource.FromStream(() =>
+                            {
+                                var stream = file.GetStream();
+                                return stream;
+                            });
+                            break;
+                        case 5:
+                            ImageUrl5 = ImageSource.FromStream(() =>
+                            {
+                                var stream = file.GetStream();
+                                return stream;
+                            });
+                            break;
+                    }
+
+
+                    ProductImages.Add(file);
+                    // MessagingCenter.Send<MediaFile>(file, "ProductImage");
+                }
+            }
+        }
+
 
         ImageSource _imageUrl1;
         public ImageSource ImageUrl1

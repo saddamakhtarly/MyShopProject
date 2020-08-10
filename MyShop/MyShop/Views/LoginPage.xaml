@@ -21,7 +21,7 @@
                     <StackLayout Padding="20,25,20,20" Spacing="2">
                         <Label Text="Sign In"  HorizontalOptions="Center" FontSize="25" Style="{StaticResource BoldFontLabel}"/>
                         <Label Text="Enter Your Login Details" HorizontalOptions="Center" FontSize="18" Style="{StaticResource MediumFontLabel}"/>
-                        <local:LoginEntry x:Name="txtUsername" Margin="0,15,0,0" Placeholder="Username" Style="{StaticResource MediumFontEntry}" Text="{Binding Username}"/>
+                        <local:LoginEntry x:Name="txtUsername" Margin="0,15,0,0" Placeholder="Username" Style="{StaticResource MediumFontEntry}" Text="{Binding UserName}"/>
                         <local:LoginEntry x:Name="txtPassword" Margin="0,15,0,0" Placeholder="Password" IsPassword="True" Style="{StaticResource MediumFontEntry}" Text="{Binding Password}"/>
                         <Button Text="Sign In" x:Name="btnsignin" CornerRadius="10" Margin="0,15,0,0" Command="{Binding LoginClicked}"
                             TextColor="White" BackgroundColor="#ec38a3" Style="{StaticResource MediumFontButton}"/>

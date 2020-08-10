@@ -3,16 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="MyShop.Views.CreateProduct">
     <ContentPage.Content>
-        <StackLayout Padding="15">
+        <!--<StackLayout Padding="15">
             <Entry Text="{Binding ProductName,Mode=TwoWay}" Placeholder="Product Name"/>
             <Entry Text="{Binding Price,Mode=TwoWay}" Placeholder="Price" Keyboard="Numeric"/>
             <Entry Text="{Binding Description}" Placeholder="Description"/>
             <Picker Title="Select Category" ItemsSource="{Binding Categories}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCategory}"/>
             <Button Text="Upload Image" Command="{Binding UploadImage}"/>
             <Button Text="Save Product" Command="{Binding SaveProduct}"/>
-        </StackLayout>
+        </StackLayout>-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <yummy:PancakeView CornerRadius="50,50,0,0" Padding="0" BackgroundColor="White" Grid.Row="1"  >
+                <ScrollView>
+                    <StackLayout Padding="15">
+                        <Entry Text="{Binding ProductName,Mode=TwoWay}" Margin="0,15,0,0"  Style="{StaticResource MediumFontEntry}" Placeholder="Product Name"/>
+                        <Entry Text="{Binding Price,Mode=TwoWay}" Margin="0,15,0,0"  Style="{StaticResource MediumFontEntry}" Placeholder="Price" Keyboard="Numeric"/>
+                        <Entry Text="{Binding Description}" Margin="0,15,0,0"  Style="{StaticResource MediumFontEntry}" Placeholder="Description"/>
+                        <Picker Title="Select Category" ItemsSource="{Binding Categories}" Margin="0,15,0,0"  Style="{StaticResource MediumFontEntry}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding SelectedCategory}"/>
+
+
+                        <StackLayout>
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Row="0" Grid.Column="0" HeightRequest="200" Source="{Binding ImageUrl1,Mode=TwoWay}"
+                       HorizontalOptions="Fill" />
+                                <Button Text="Upload" Grid.Row="1" Grid.Column="0" Command="{Binding CaptureImage}" CommandParameter="1" CornerRadius="10" BackgroundColor="Green"  TextColor="White" Style="{StaticResource MediumFontButton}"/>
+
+                                <Image Grid.Row="0" Grid.Column="1" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl2,Mode=TwoWay}"
+                       />
+                                <Button Text="Upload" Grid.Row="1" Grid.Column="1" Command="{Binding CaptureImage}" CommandParameter="2" CornerRadius="10" BackgroundColor="Green"  TextColor="White" Style="{StaticResource MediumFontButton}"/>
+
+                                <Image Grid.Row="0" Grid.Column="2" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl3,Mode=TwoWay}"
+                       />
+                                <Button Text="Upload" Grid.Row="1" Grid.Column="2" Command="{Binding CaptureImage}" CommandParameter="3" CornerRadius="10" BackgroundColor="Green"  TextColor="White" Style="{StaticResource MediumFontButton}"/>
+
+                                <Image Grid.Row="2" Grid.Column="0" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl4,Mode=TwoWay}"
+                       />
+                                <Button Text="Upload" Grid.Row="3" Grid.Column="0" Command="{Binding CaptureImage}" CommandParameter="4" CornerRadius="10" BackgroundColor="Green"  TextColor="White" Style="{StaticResource MediumFontButton}"/>
+
+                                <Image Grid.Row="2" Grid.Column="1" HeightRequest="200" HorizontalOptions="Fill" Source="{Binding ImageUrl5,Mode=TwoWay}"
+                       />
+                                <Button Text="Upload" Grid.Row="3" Grid.Column="1" Command="{Binding CaptureImage}" CommandParameter="5" CornerRadius="10" BackgroundColor="Green"  TextColor="White" Style="{StaticResource MediumFontButton}"/>
+                            </Grid>
+                        </StackLayout>
+                        <Button Text="Save Product" Margin="0,15,0,0" CornerRadius="10" BackgroundColor="Green"  TextColor="White" Style="{StaticResource MediumFontButton}" Command="{Binding SaveProduct}"/>
+
+                    </StackLayout>
+                </ScrollView>
+            </yummy:PancakeView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -14,7 +14,7 @@ namespace MyShop.ViewModels
         {
             Navigation = navigation;
         }
-        public Command LoginCommand
+        public Command LoginClicked
         {
             get
             {
@@ -22,12 +22,42 @@ namespace MyShop.ViewModels
                 {
 
                     var resp = await new ApiFunctions().apilogin(UserName,Password);
-                    GlobalVariables.apilogin = resp;
-                    await Navigation.PushAsync(new ApiProductPage());
+                    if (!string.IsNullOrEmpty(resp.access_token))
+                    {
+                        GlobalVariables.apilogin = resp;
+                        await Navigation.PushAsync(new ApiProductPage());
+                        //await Navigation.PushAsync(new FrontPage());
+                    }
+                    else
+                    {
+                       await Application.Current.MainPage.DisplayAlert("Message", "Invalid Login", "Ok");
+                    }
 
                 });
             }
 
+        }
+        public Command SignupClicked
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                   // Navigation.PushAsync(new SignupPage());
+                });
+
+            }
+        }
+        public Command ForgotPasswordClicked
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    // Navigation.PushAsync(new ResetPasswordPage());
+                });
+
+            }
         }
         private string _username;
         public string UserName

@@ -437,7 +437,47 @@ namespace MyShopAPI.Controllers
             return response;
         }
 
+        [Route("SearchProduct")]
+        [HttpGet]
+        public GetProductResponse SearchProduct(string keyword)
+        {
 
+            GetProductResponse response = new GetProductResponse();
+            try
+            {
+                using (var conn = GetConnection())
+                {
+                    SqlCommand com = new SqlCommand("Sp_GetSearchProducts", conn);
+                    com.CommandType = CommandType.StoredProcedure;
+                    com.Parameters.AddWithValue("@Keyword", keyword);
+
+                    conn.Open();
+                    SqlDataReader reader = com.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        response.Products.Add(new Product
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Name = Convert.ToString(reader["Name"]),
+                            CategoryId = Convert.ToInt32(reader["CategoryId"]),
+                            Description = Convert.ToString(reader["Description"]),
+                            MRP = Convert.ToDecimal(reader["MRP"]),
+                            SalePrice = Convert.ToDecimal(reader["SellPrice"]),
+                            ThumbnailURL = Convert.ToString(reader["ThumbnailURL"])
+
+                        });
+                    }
+
+                    response.Message = $"{response.Products.Count} products found";
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+            return response;
+        }
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("SaveCart")]
         public SaveCartResponse SaveCart(Cart cart)

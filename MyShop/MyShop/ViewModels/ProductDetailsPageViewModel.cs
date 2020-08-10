@@ -71,11 +71,11 @@ namespace MyShop.ViewModels
                     var resp = await new GlobalFunctions().SaveCart(cart);
                     if (resp.IsValid)
                     {
-                        Application.Current.MainPage.DisplayAlert("Message", "Item Saved", "Ok");
+                      await  Application.Current.MainPage.DisplayAlert("Message", "Item Add To Care", "Ok");
                     }
                     else
                     {
-                        Application.Current.MainPage.DisplayAlert("Message", "Item failed to Save", "Ok");
+                       await Application.Current.MainPage.DisplayAlert("Message", "Item Failed To Add", "Ok");
                     }
                 });
             }

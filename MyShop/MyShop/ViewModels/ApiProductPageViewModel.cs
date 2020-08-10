@@ -2,6 +2,7 @@
 using MyShop.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -13,6 +14,7 @@ namespace MyShop.ViewModels
         public ApiProductPageViewModel(INavigation navigation)
         {
             Navigation = navigation;
+            
         }
 
         public Command ShowProduct
@@ -23,16 +25,23 @@ namespace MyShop.ViewModels
                 {
 
                     var resp = await new ApiFunctions().apiproduct(GlobalVariables.apilogin.access_token);
-                    if (resp!=null)
-                    {
-                        await Navigation.PushAsync(new AboutPage());
-                    }
-                    
+                    Products = new ObservableCollection<ProductDate>();
+                    Products = new ObservableCollection<ProductDate>(resp?.data as List<ProductDate>);
+
                 });
             }
 
         }
-
+        ObservableCollection<ProductDate> _products;
+        public ObservableCollection<ProductDate> Products
+        {
+            get { return _products; }
+            set
+            {
+                _products = value;
+                OnPropertyChanged();
+            }
+        }
 
     }
 }

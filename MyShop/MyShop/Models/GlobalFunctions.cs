@@ -190,6 +190,22 @@ namespace MyShop.Models
                 }
             }
         }
+        public async Task<GetProductResponse> SearchProducts(string keyword)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"{serviceURL}api/Shop/SearchProduct?keyword={keyword}"))
+                {
+                    var resp = await httpClient.SendAsync(request);
+                    string jsonResp = await resp.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<GetProductResponse>(jsonResp);
+                }
+            }
+        }
+
+
+
+
         public async Task<GetProductImageResponse> GetProductImage(int ProductId )
         {
             using (var httpClient = new HttpClient())

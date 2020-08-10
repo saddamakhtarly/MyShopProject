@@ -131,12 +131,14 @@ namespace MyShop.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async() =>
                 {
                     if (!string.IsNullOrEmpty(SearchText))
                     {
-                        List<Product> searchData = Products.Where(x => x.Name.ToLower().Contains(SearchText.ToLower())).ToList();
-                        Products = new ObservableCollection<Product>(searchData as List<Product>);
+                        //List<Product> searchData = Products.Where(x => x.Name.ToLower().Contains(SearchText.ToLower())).ToList();
+                        //Products = new ObservableCollection<Product>(searchData as List<Product>);
+                        var resp= await new GlobalFunctions().SearchProducts(SearchText);
+                        Products = new ObservableCollection<Product>(resp.Products as List<Product>);
                         if (Products.Count() == 0)
                         {
                             IsVisibleStatus = true;
@@ -158,12 +160,14 @@ namespace MyShop.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async() =>
                 {
                     if (!string.IsNullOrEmpty(SearchText))
                     {
-                        List<Product> searchData = Products.Where(x => x.Name.ToLower().Contains(SearchText.ToLower())).ToList();
-                        Products = new ObservableCollection<Product>(searchData as List<Product>);
+                        //List<Product> searchData = Products.Where(x => x.Name.ToLower().Contains(SearchText.ToLower())).ToList();
+                        //Products = new ObservableCollection<Product>(searchData as List<Product>);
+                        var resp = await new GlobalFunctions().SearchProducts(SearchText);
+                        Products = new ObservableCollection<Product>(resp.Products as List<Product>);
                         if (Products.Count() == 0)
                         {
                             IsVisibleStatus = true;
