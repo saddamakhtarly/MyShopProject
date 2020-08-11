@@ -30,7 +30,7 @@ namespace MyShop.ViewModels
 			Countries.Add(new Country { Id = 1, Name = "USA" });
 		}
 
-		public Command SaveAddress
+		public Command SaveShippingAddress
 		{
 			get
 			{
@@ -38,30 +38,26 @@ namespace MyShop.ViewModels
 				{
 					if (CheckValidations())
 					{
-						Address addresess = new Address();
+						ShippingAddress addresess = new ShippingAddress();
 						addresess.FullName = FullName;
 						addresess.PinCode = PinCode.ToString();
-						addresess.State = SelectedState.Id;
+						addresess.StateId = SelectedState.Id;
 						addresess.StreetNo = StreetNo;
-						addresess.City = City;
+						addresess.CityName = CityName;
 						addresess.MobileNumber = MobileNumber;
 						addresess.HouseNo = HouseNo;
 						addresess.Landmark = Landmark;
 						addresess.Area = Area;
-						addresess.Country = SelectedCountry.Id;
+						addresess.CountryId = SelectedCountry.Id;
 						addresess.UserId = GlobalVariables.user_id;
 
-						var response = await new GlobalFunctions().SaveAddress(addresess);
+						var response = await new GlobalFunctions().SaveShippingAddress(addresess);
 						if (response.IsValid)
 						{
-							FullName = "";
-							PinCode = 0;
-							SelectedState.Id = 0;
-							StreetNo = "";
-							City ="";
-							SelectedCountry.Id = 0;
+							
 							// success
 							await Application.Current.MainPage.DisplayAlert("Message", "Address Saved Successfully", "OK");
+						await	Navigation.PopAsync();
 						}
 						else
 						{
@@ -94,7 +90,7 @@ namespace MyShop.ViewModels
 				Application.Current.MainPage.DisplayAlert("Message", "Please enter StreetNo", "Cancel");
 				return false;
 			}
-			else if (string.IsNullOrEmpty(City))
+			else if (string.IsNullOrEmpty(CityName))
 			{
 				Application.Current.MainPage.DisplayAlert("Message", "Please enter city", "Cancel");
 				return false;
@@ -195,12 +191,12 @@ namespace MyShop.ViewModels
 			get { return _selectedCountry; }
 			set { _selectedCountry = value; OnPropertyChanged(); }
 		}
-		private string _city;
+		private string _cityName;
 
-		public string City
+		public string CityName
 		{
-			get { return _city; }
-			set { _city = value; OnPropertyChanged(); }
+			get { return _cityName; }
+			set { _cityName = value; OnPropertyChanged(); }
 		}
 	}
 }

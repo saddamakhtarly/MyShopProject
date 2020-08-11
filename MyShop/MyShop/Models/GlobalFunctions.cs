@@ -202,10 +202,6 @@ namespace MyShop.Models
                 }
             }
         }
-
-
-
-
         public async Task<GetProductImageResponse> GetProductImage(int ProductId )
         {
             using (var httpClient = new HttpClient())
@@ -250,6 +246,24 @@ namespace MyShop.Models
                 }
             }
         }
+
+
+        public async Task<SaveAddressResponce> SaveShippingAddress(ShippingAddress adress)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"), $"{serviceURL}api/Order/SaveShippingAddress"))
+                {
+                    string jsonData = JsonConvert.SerializeObject(adress);
+                    request.Content = new StringContent(jsonData);
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+                    var response = await httpClient.SendAsync(request);
+                    string jsonResp = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<SaveAddressResponce>(jsonResp);
+                }
+            }
+        }
+
 
         public async Task<GetCartResponse> GetCart(int UserId = 0)
         {

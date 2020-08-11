@@ -32,7 +32,7 @@ namespace MyShopAPI.Controllers
             CreateOrderresponse resp = new CreateOrderresponse();
             try
             {
-                if (order.ShipmentAddress.Country <= 0)
+                if (order.ShipmentAddress.CountryId <= 0)
                 {
                     resp.Message = "country is mandatory";
                 }
@@ -52,11 +52,11 @@ namespace MyShopAPI.Controllers
                 {
                     resp.Message = "landmark is mandatory";
                 }
-                else if (string.IsNullOrEmpty(order.ShipmentAddress.City))
+                else if (string.IsNullOrEmpty(order.ShipmentAddress.CityName))
                 {
                     resp.Message = "city is mandatory";
                 }
-                else if (order.ShipmentAddress.State <= 0)
+                else if (order.ShipmentAddress.StateId <= 0)
                 {
                     resp.Message = "state is mandatory";
                 }
@@ -136,7 +136,7 @@ namespace MyShopAPI.Controllers
                             com.CommandType = CommandType.StoredProcedure;
 
                             com.Parameters.AddWithValue("@OrderId", orderId);
-                            com.Parameters.AddWithValue("@Country", order.ShipmentAddress.Country);
+                            com.Parameters.AddWithValue("@Country", order.ShipmentAddress.CountryId);
                             com.Parameters.AddWithValue("@FullName", order.ShipmentAddress.FullName);
                             com.Parameters.AddWithValue("@MobileNumber", order.ShipmentAddress.MobileNumber);
                             com.Parameters.AddWithValue("@PINCode", order.ShipmentAddress.PinCode);
@@ -144,8 +144,8 @@ namespace MyShopAPI.Controllers
                             com.Parameters.AddWithValue("@StreetNo", order.ShipmentAddress.StreetNo);
                             com.Parameters.AddWithValue("@Area", order.ShipmentAddress.Area);
                             com.Parameters.AddWithValue("@Landmark", order.ShipmentAddress.Landmark);
-                            com.Parameters.AddWithValue("@City", order.ShipmentAddress.City);
-                            com.Parameters.AddWithValue("@State", order.ShipmentAddress.State);
+                            com.Parameters.AddWithValue("@City", order.ShipmentAddress.CityName);
+                            com.Parameters.AddWithValue("@State", order.ShipmentAddress.StateId);
                             com.Parameters.AddWithValue("@Description", order.ShipmentAddress.Description);
 
                             com.Parameters.Add("@ReturnParamater", SqlDbType.Int, 4);
@@ -174,6 +174,95 @@ namespace MyShopAPI.Controllers
             }
             return resp;
         }
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("SaveShippingAddress")]
+        public SaveShippingAddressResponce SaveShippingAddress([FromBody] ShippingAddress shippingAddress)
+        {
+            SaveShippingAddressResponce resp = new SaveShippingAddressResponce();
+            try
+            {
+                if (shippingAddress.CountryId <= 0)
+                {
+                    resp.Message = "country is mandatory";
+                }
+                else if (string.IsNullOrEmpty(shippingAddress.FullName))
+                {
+                    resp.Message = "Full Name is mandatory";
+                }
+                else if (string.IsNullOrEmpty(shippingAddress.MobileNumber))
+                {
+                    resp.Message = "mobile no is mandatory";
+                }
+                else if (string.IsNullOrEmpty(shippingAddress.PinCode))
+                {
+                    resp.Message = "pincode is mandatory";
+                }
+                else if (string.IsNullOrEmpty(shippingAddress.Landmark))
+                {
+                    resp.Message = "landmark is mandatory";
+                }
+                else if (string.IsNullOrEmpty(shippingAddress.CityName))
+                {
+                    resp.Message = "city is mandatory";
+                }
+                else if (shippingAddress.StateId <= 0)
+                {
+                    resp.Message = "state is mandatory";
+                }
+       
+                else
+                {
+                    // save
+                    using (var conn = GetConnection())
+                    {
+                        SqlCommand com = new SqlCommand("Sp_SaveShippingAddress", conn);
+                        com.CommandType = CommandType.StoredProcedure;
+
+                        com.Parameters.AddWithValue("@UserId", shippingAddress.UserId);
+                        com.Parameters.AddWithValue("@OrderId", shippingAddress.OrderId);
+                        com.Parameters.AddWithValue("@CountryId", shippingAddress.CountryId);
+                        com.Parameters.AddWithValue("@StateId", shippingAddress.StateId);
+                        com.Parameters.AddWithValue("@CityName", shippingAddress.CityName);
+                        com.Parameters.AddWithValue("@FullName", shippingAddress.FullName);
+                        com.Parameters.AddWithValue("@MobileNumber", shippingAddress.MobileNumber);
+                        com.Parameters.AddWithValue("@PINCode", shippingAddress.PinCode);
+                        com.Parameters.AddWithValue("@HouseNo", shippingAddress.HouseNo);
+                        com.Parameters.AddWithValue("@StreetNo", shippingAddress.StreetNo);
+                        com.Parameters.AddWithValue("@Area", shippingAddress.Area);
+                        com.Parameters.AddWithValue("@Landmark", shippingAddress.Landmark);
+                        com.Parameters.AddWithValue("@Description", shippingAddress.Description);
+                        com.Parameters.Add("@ReturnParamater", SqlDbType.Int, 4);
+                        com.Parameters["@ReturnParamater"].Direction = ParameterDirection.Output;
+                        com.Parameters.Add("@Message", SqlDbType.NVarChar, 100);
+                        com.Parameters["@Message"].Direction = ParameterDirection.Output;
+                        conn.Open();
+                        int res = com.ExecuteNonQuery();
+                        if (res > 0)
+                        {
+                            resp.Message = com.Parameters["@Message"].Value.ToString();
+                            resp.IsValid = true;
+                        }
+                        else
+                        {
+                            resp.Message = com.Parameters["@Message"].Value.ToString();
+                        }
+                        conn.Close();
+                    }
+
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                resp.Message = ex.Message;
+            }
+            return resp;
+        }
+       
+
+
+
 
         public string GenerateRefNo()
         {
@@ -288,7 +377,7 @@ namespace MyShopAPI.Controllers
                         }
                         if (orderAddress.Rows.Count > 0)
                         {
-                            response.Country = Convert.ToInt32(orderAddress.Rows[0]["Country"]);
+                            response.CountryId = Convert.ToInt32(orderAddress.Rows[0]["CountryId"]);
                             response.FullName = Convert.ToString(orderAddress.Rows[0]["FullName"]);
                             response.MobileNumber = Convert.ToString(orderAddress.Rows[0]["MobileNumber"]);
                             response.PinCode = Convert.ToString(orderAddress.Rows[0]["PINCode"]);
@@ -296,8 +385,8 @@ namespace MyShopAPI.Controllers
                             response.StreetNo = Convert.ToString(orderAddress.Rows[0]["StreetNo"]);
                             response.Area = Convert.ToString(orderAddress.Rows[0]["Area"]);
                             response.Landmark = Convert.ToString(orderAddress.Rows[0]["Landmark"]);
-                            response.City = Convert.ToString(orderAddress.Rows[0]["City"]);
-                            response.State = Convert.ToInt32(orderAddress.Rows[0]["State"]);
+                            response.CityName = Convert.ToString(orderAddress.Rows[0]["CityName"]);
+                            response.StateId = Convert.ToInt32(orderAddress.Rows[0]["StateId"]);
                             response.Description = Convert.ToString(orderAddress.Rows[0]["Description"]);
                         }
                     }

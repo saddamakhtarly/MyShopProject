@@ -58,15 +58,15 @@ namespace MyShop.ViewModels
                     order.UserId = GlobalVariables.user_id;
 
                     order.ShipmentAddress.Area = Selected_Address.Area;
-                    order.ShipmentAddress.City = Selected_Address.City;
-                    order.ShipmentAddress.Country = Selected_Address.Country;
+                    order.ShipmentAddress.CityName = Selected_Address.City;
+                    order.ShipmentAddress.CountryId = Selected_Address.Country;
                     order.ShipmentAddress.Description = "";
                     order.ShipmentAddress.FullName = Selected_Address.FullName;
                     order.ShipmentAddress.HouseNo = Selected_Address.HouseNo;
                     order.ShipmentAddress.Landmark = Selected_Address.Landmark;
                     order.ShipmentAddress.MobileNumber = Selected_Address.MobileNumber;
                     order.ShipmentAddress.PinCode = Selected_Address.PinCode;
-                    order.ShipmentAddress.State = Selected_Address.State;
+                    order.ShipmentAddress.StateId = Selected_Address.State;
                     order.ShipmentAddress.StreetNo = Selected_Address.StreetNo;
 
                     order.PaidAmount = 0;

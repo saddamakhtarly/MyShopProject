@@ -18,7 +18,6 @@ namespace MyShopCommonLib
         public decimal Discount { get; set; }
         public decimal ShippingCharge { get; set; }
         public int UserId { get; set; }
-
         public int PaymentType { get; set; }//0=COD,1=Pay Now,2=Paypal
     }
     public class CreateOrderresponse : Response
@@ -33,7 +32,11 @@ namespace MyShopCommonLib
     public class ShippingAddress
     {
         public int Id { get; set; }
-        public int Country { get; set; }
+        public int OrderId { get; set; }
+        public int UserId { get; set; }
+        public int CountryId { get; set; }
+        public int StateId { get; set; }
+        public string CityName { get; set; }
         public string FullName { get; set; }
         public string MobileNumber { get; set; }
         public string PinCode { get; set; }
@@ -41,11 +44,14 @@ namespace MyShopCommonLib
         public string StreetNo { get; set; }
         public string Area { get; set; }
         public string Landmark { get; set; }
-        public string City { get; set; }
-        public int State { get; set; }
         public string Description { get; set; }
 
     }
+    public class SaveShippingAddressResponce:Response
+    {
+
+    }
+
 
     public class GetOrderResponse : Response
     {
@@ -83,7 +89,7 @@ namespace MyShopCommonLib
         //=== order items
         public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         //== shippingAddress
-        public int Country { get; set; }
+        public int CountryId { get; set; }
         public string FullName { get; set; }
         public string MobileNumber { get; set; }
         public string PinCode { get; set; }
@@ -91,8 +97,8 @@ namespace MyShopCommonLib
         public string StreetNo { get; set; }
         public string Area { get; set; }
         public string Landmark { get; set; }
-        public string City { get; set; }
-        public int State { get; set; }
+        public string CityName { get; set; }
+        public int StateId { get; set; }
         public string Description { get; set; }
     }
 

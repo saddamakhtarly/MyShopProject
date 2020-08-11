@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="MyShop.Views.ShippingAddressPage">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Padding ="0,30,0,0" >
             <StackLayout BackgroundColor="Azure" >
                 <StackLayout Orientation="Horizontal" >
@@ -38,7 +39,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
                     <Label FontAttributes="Bold" Text="City" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
-                    <Entry Placeholder="Enter City" x:Name="Cities" Text="{Binding City}"/>
+                    <Entry Placeholder="Enter City" x:Name="Cities" Text="{Binding CityName}"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" BackgroundColor="Azure" >
                     <Label FontAttributes="Bold" Text="State" WidthRequest="150" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Padding="10" />
@@ -49,8 +50,9 @@
                     <Picker Title="Select Country" x:Name="Countries" ItemDisplayBinding="{Binding Name}" ItemsSource="{Binding Countries}"
                             SelectedItem="{Binding SelectedCountry}"/>
                 </StackLayout>
-                <Button Text="Proceed To Check Out" Command="{Binding SaveAddress}"/>
+                    <Button Text="Proceed To Check Out" Command="{Binding SaveShippingAddress}"/>
             </StackLayout>
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
