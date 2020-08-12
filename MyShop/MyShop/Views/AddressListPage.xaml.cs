@@ -1,4 +1,5 @@
 ﻿using MyShop.Models;
+using MyShop.ViewModels;
 using MyShopCommonLib;
 using System;
 using System.Collections.Generic;
@@ -12,19 +13,19 @@ using Xamarin.Forms.Xaml;
 namespace MyShop.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddressesPage : ContentPage
+    public partial class AddressListPage : ContentPage
     {
-        public AddressesPage()
+        public AddressListPage()
         {
             InitializeComponent();
-            PopulateAddress();
+            
+            
+        }
+        protected override void OnAppearing()
+        {
+            BindingContext = new AddressListPageViewModel(Navigation);
         }
 
-        private async void PopulateAddress()
-        {
-            var data = await new GlobalFunctions().GetAddress(GlobalVariables.user_id);
-            addresses.ItemsSource = data.Addresses;
-        }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {

@@ -9,6 +9,7 @@ namespace MyShopCommonLib
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int RoleId { get; set; }
     }
     public class Response
     {
@@ -31,6 +32,6 @@ namespace MyShopCommonLib
         public string FullName { get; set; } = "";
         public string Mobile { get; set; } = "";
         public string Email { get; set; } = "";
-        public int Role { get; set; }
+        public int Role { get; set; } = 0;
     }
 }

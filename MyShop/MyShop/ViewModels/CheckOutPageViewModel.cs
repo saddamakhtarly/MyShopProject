@@ -11,14 +11,14 @@ using Xamarin.Forms;
 
 namespace MyShop.ViewModels
 {
-    public class CheckoutViewModel : NotifyModel
+    public class CheckOutPageViewModel : NotifyModel
     {
-        INavigation Navigation;
+        public INavigation Navigation { get; set; }
         Address addresess;
         Address Selected_Address;
         ///string TotalPrice;
         ObservableCollection<CartItem> CartItems;
-        public CheckoutViewModel(INavigation navigation, string totalqty, string totalprice, ObservableCollection<CartItem> Items)
+        public CheckOutPageViewModel(INavigation navigation, string totalqty, string totalprice, ObservableCollection<CartItem> Items)
         {
             Navigation = navigation;
             Totalqty = totalqty;
@@ -36,15 +36,13 @@ namespace MyShop.ViewModels
                     MessagingCenter.Subscribe<Address>(this, "SelectedAddress", (value) =>
                     {
                         FullName = value.FullName;
-                        State = value.State.ToString();
-                        Country = value.Country.ToString();
-                        Selected_Address = value;
+                        City = value.CityName;
+                        MobileNumber = value.MobileNumber;
+                        Street = value.StreetNo;
+                        HouseNo = value.HouseNo;
+                        
                     });
-                    await Navigation.PushAsync(new AddressesPage());
-
-
-                    
-                    //}
+                    await Navigation.PushAsync(new AddressListPage());
                 });
             }
         }
@@ -55,23 +53,24 @@ namespace MyShop.ViewModels
                 return new Command(async () =>
                 {
                     Order order = new Order();
+                    order.ShipmentAddress = new Address();
+                    order.Items = new List<CartItem>();
                     order.UserId = GlobalVariables.user_id;
 
                     order.ShipmentAddress.Area = Selected_Address.Area;
-                    order.ShipmentAddress.CityName = Selected_Address.City;
-                    order.ShipmentAddress.CountryId = Selected_Address.Country;
-                    order.ShipmentAddress.Description = "";
+                    order.ShipmentAddress.CityName = Selected_Address.CityName;
+                    order.ShipmentAddress.CountryId = Selected_Address.CountryId;
                     order.ShipmentAddress.FullName = Selected_Address.FullName;
                     order.ShipmentAddress.HouseNo = Selected_Address.HouseNo;
                     order.ShipmentAddress.Landmark = Selected_Address.Landmark;
                     order.ShipmentAddress.MobileNumber = Selected_Address.MobileNumber;
                     order.ShipmentAddress.PinCode = Selected_Address.PinCode;
-                    order.ShipmentAddress.StateId = Selected_Address.State;
+                    order.ShipmentAddress.StateId = Selected_Address.StateId;
                     order.ShipmentAddress.StreetNo = Selected_Address.StreetNo;
 
                     order.PaidAmount = 0;
                     order.PaymentType = 1;
-                    order.OrderAmount = CartItems.Sum(x=>x.SalePrice * x.Quantity);
+                    order.OrderAmount = CartItems.Sum(x => x.SalePrice * x.Quantity);
                     order.ShippingCharge = 0;
                     order.Items = CartItems.ToList();
                     order.Discount = 0;
@@ -81,8 +80,6 @@ namespace MyShop.ViewModels
                 });
             }
         }
-
-
         public async void ExecutePlaceOrderCommand()
         {
             // UserDialogs.Instance.ShowLoading();
@@ -114,10 +111,6 @@ namespace MyShop.ViewModels
 
 
         }
-
-
-
-
         private bool CheckValidations()
         {
             if (string.IsNullOrWhiteSpace(FullName))
@@ -136,7 +129,7 @@ namespace MyShop.ViewModels
                 return false;
             }
 
-            else if (string.IsNullOrWhiteSpace(State))
+            else if (StateId <= 0)
             {
                 Application.Current.MainPage.DisplayAlert("Message", "Please enter State", "Cancel");
                 return false;
@@ -147,12 +140,6 @@ namespace MyShop.ViewModels
                 return true;
             }
         }
-
-
-
-
-
-
         string _totalqty;
         public string Totalqty
         {
@@ -166,7 +153,6 @@ namespace MyShop.ViewModels
                 }
             }
         }
-
         string _totalPrice;
         public string TotalPrice
         {
@@ -180,33 +166,20 @@ namespace MyShop.ViewModels
                 }
             }
         }
-
-        string _country;
-        public string Country
+        int _countryId;
+        public int CountryId
         {
-            get { return _country; }
+            get { return _countryId; }
             set
             {
                 if (value != null)
                 {
-                    _country = value;
+                    _countryId = value;
                     OnPropertyChanged();
                 }
             }
         }
-        string _street;
-        public string Street
-        {
-            get { return _street; }
-            set
-            {
-                if (value != null)
-                {
-                    _street = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        
         string _city;
         public string City
         {
@@ -220,17 +193,14 @@ namespace MyShop.ViewModels
                 }
             }
         }
-        string _state;
-        public string State
+        int _stateId;
+        public int StateId
         {
-            get { return _state; }
+            get { return _stateId; }
             set
             {
-                if (value != null)
-                {
-                    _state = value;
-                    OnPropertyChanged();
-                }
+                _stateId = value;
+                OnPropertyChanged();
             }
         }
         string _fullName;
@@ -246,6 +216,20 @@ namespace MyShop.ViewModels
                 }
             }
         }
+        string _mobileNumber;
+        public string MobileNumber
+        {
+            get { return _mobileNumber; }
+            set
+            {
+                if (value != null)
+                {
+                    _mobileNumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         int _pinCode;
         public int PinCode
         {
@@ -260,6 +244,32 @@ namespace MyShop.ViewModels
                 OnPropertyChanged();
 
             }
-        }       
+        }
+        string _street;
+        public string Street
+        {
+            get { return _street; }
+            set
+            {
+                if (value != null)
+                {
+                    _street = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        string _houseNo;
+        public string HouseNo
+        {
+            get { return _houseNo; }
+            set
+            {
+                if (value != null)
+                {
+                    _houseNo = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
     }
 }

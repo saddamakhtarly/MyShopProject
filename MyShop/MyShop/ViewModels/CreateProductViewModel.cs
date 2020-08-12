@@ -18,12 +18,6 @@ namespace MyShop.ViewModels
             Navigation = navigation;
             PopulateCategories();
             ProductImages = new List<MediaFile>();
-
-            //MessagingCenter.Unsubscribe<MediaFile>(this, "ProductImage");
-            //MessagingCenter.Subscribe<MediaFile>(this, "ProductImage", (media) =>
-            //  {
-            //      ProductImages.Add(media);
-            //  });
         }
 
         private async void PopulateCategories()

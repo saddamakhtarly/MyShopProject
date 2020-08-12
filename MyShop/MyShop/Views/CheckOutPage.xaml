@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MyShop.Views.ProccedToCheckout">
+             x:Class="MyShop.Views.CheckOutPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="30" Spacing="20">
@@ -22,9 +22,11 @@
 
                 <Label Text="Shipping Address:" FontAttributes="Bold" FontSize="Medium" TextColor="Black"></Label>
                 <StackLayout BackgroundColor="White" Padding="20">
-                    <Label Text="{Binding FullName,Mode=TwoWay}"/>
-                    <Label Text="{Binding Country,Mode=TwoWay}"/>
-                    <Label Text="{Binding State,Mode=TwoWay}"/>
+                    <Label Text="{Binding FullName}"/>
+                    <Label Text="{Binding City}"/>
+                    <Label Text="{Binding MobileNumber}"/>
+                    <Label Text="{Binding Street}"/>
+                    <Label Text="{Binding HouseNo}"/>
                     <Button Text="Select Shipping Address" Command="{Binding AddAddress}" HorizontalOptions="FillAndExpand" BackgroundColor="#2DCA71"></Button>
                   
                 </StackLayout>
@@ -54,7 +56,7 @@
                     </StackLayout>
 
                 </StackLayout>
-                <Button  Text="Place Order" Command="{Binding PlaceOrder}" Clicked="PlaceOrder" BackgroundColor="#2DCA71"  HorizontalOptions="FillAndExpand"></Button>
+                <Button  Text="Place Order" Command="{Binding PlaceOrder}"  BackgroundColor="#2DCA71"  HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -8,10 +8,10 @@ namespace MyShopCommonLib
     {
         public Order()
         {
-            ShipmentAddress = new ShippingAddress();
+            ShipmentAddress = new Address();
             Items = new List<CartItem>();
         }
-        public ShippingAddress ShipmentAddress { get; set; }
+        public Address ShipmentAddress { get; set; }
         public List<CartItem> Items { get; set; }
         public decimal OrderAmount { get; set; }
         public decimal PaidAmount { get; set; }

@@ -27,7 +27,8 @@ namespace MyShop.ViewModels
                             Email = Email,
                             FullName = Name,
                             Mobile = Mobile,
-                            Password = Password
+                            Password = Password,
+                            RoleId = RoleId
                         };
                         var resp = await new GlobalFunctions().RegisterUser(user);
                         if (resp.IsValid)
@@ -136,6 +137,20 @@ namespace MyShop.ViewModels
                     _confirmpassword = value;
                     OnPropertyChanged();
                 }
+            }
+        }
+        int _roleId;
+        public int RoleId
+        {
+            get
+            {
+                return _roleId;
+            }
+            set
+            {
+               
+                    _roleId = value;
+                    OnPropertyChanged();
             }
         }
     }

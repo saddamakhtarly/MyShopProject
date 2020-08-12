@@ -31,16 +31,16 @@ namespace MyShop.ViewModels
             }
             Products = new ObservableCollection<Product>(resp.Products as List<Product>);
         }
-        ObservableCollection<Product> _productData;
-        ObservableCollection<Product> ProductData
-        {
-            get { return _productData; }
-            set
-            {
-                _productData = value;
-                OnPropertyChanged();
-            }
-        }
+        //ObservableCollection<Product> _productData;
+        //ObservableCollection<Product> ProductData
+        //{
+        //    get { return _productData; }
+        //    set
+        //    {
+        //        _productData = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
         Product _selectedProduct;
         public Product SelectedProduct
         {

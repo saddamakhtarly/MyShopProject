@@ -4,20 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MyShop.Views.AddressesPage">
+             x:Class="MyShop.Views.AddressListPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Priority="0" Order="Primary" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Text="Add New Address" Priority="0" Order="Primary"  Command="{Binding AddressPage}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="addresses" ItemTapped="addresses_ItemTapped">
+            <ListView x:Name="addresses" ItemsSource="{Binding Addresses}" HasUnevenRows="True" SelectedItem="{Binding SelectedAddress}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout>
                                 <Label Text="{Binding FullName}"/>
-                                <Label Text="{Binding Country}"/>
-                                <Label Text="{Binding State}"/>
+                                <Label Text="{Binding CityName}"/>
+                                <Label Text="{Binding MobileNumber}"/>
+                                <Label Text="{Binding StreetNo}"/>
+                                <Label Text="{Binding HouseNo}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

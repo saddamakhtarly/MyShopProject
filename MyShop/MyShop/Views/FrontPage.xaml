@@ -9,11 +9,6 @@
              x:Class="MyShop.Views.FrontPage">
     <ContentPage.Content>
         <StackLayout Padding="10">
-
-
-
-
-
             <SearchBar Text="{Binding SearchText}" x:Name="searchBar" >
                 <SearchBar.Behaviors>
                     <eventToCommand:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchData}"/>

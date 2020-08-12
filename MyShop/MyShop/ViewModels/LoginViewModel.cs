@@ -32,12 +32,14 @@ namespace MyShop.ViewModels
                         GlobalVariables.user = resp;
                         if (resp.IsValid)
                         {
-                            Preferences.Set("Username", GlobalVariables.user.FullName);
-                            Preferences.Set("UserRole", GlobalVariables.user.Role);
+                            Preferences.Set("Username", resp.FullName);
+                            Preferences.Set("UserRole", resp.Role);
                             Preferences.Set("UserId", resp.Id);
-                            Application.Current.MainPage = new HomePage();
+                           
                             GlobalVariables.username = GlobalVariables.user.FullName;
                             GlobalVariables.user_role = GlobalVariables.user.Role;
+                            GlobalVariables.user_id = GlobalVariables.user.Id;
+                            Application.Current.MainPage = new HomePage();
                         }
                         else
                         {
@@ -57,9 +59,9 @@ namespace MyShop.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async() =>
                 {
-                    Navigation.PushAsync(new SignupPage());
+                   await Navigation.PushAsync(new SignupPage());
                 });
 
             }

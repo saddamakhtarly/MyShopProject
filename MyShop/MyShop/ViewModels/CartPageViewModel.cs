@@ -120,7 +120,7 @@ namespace MyShop.ViewModels
             {
                 return new Command(() =>
                 {
-                    Navigation.PushAsync(new ProccedToCheckout(Totalqty, TotalPrice, CartItem));
+                    Navigation.PushAsync(new CheckOutPage(Totalqty, TotalPrice, CartItem));
                 });
             }
         }
@@ -135,8 +135,6 @@ namespace MyShop.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        
         string _totalqty;
         public string Totalqty
         {
@@ -150,7 +148,6 @@ namespace MyShop.ViewModels
                 }
             }
         }
-
         string _totalPrice;
         public string TotalPrice
         {
@@ -164,7 +161,6 @@ namespace MyShop.ViewModels
                 }
             }
         }
-
         string _imageURL;
         public string ImageURL
         {

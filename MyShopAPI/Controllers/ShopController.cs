@@ -49,10 +49,12 @@ namespace MyShopAPI.Controllers
                         SqlDataReader reader = com.ExecuteReader();
                         while (reader.Read())
                         {
-                            response.Addresses.Add(new Address
+                            response.Address.Add(new Address
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
-                                Country = Convert.ToInt32(reader["Country"]),
+                                CountryId = Convert.ToInt32(reader["CountryId"]),
+                                StateId = Convert.ToInt32(reader["StateId"]),
+                                CityName = Convert.ToString(reader["CityName"]),
                                 FullName = Convert.ToString(reader["FullName"]),
                                 MobileNumber = Convert.ToString(reader["MobileNumber"]),
                                 PinCode = Convert.ToString(reader["PINCode"]),
@@ -60,8 +62,6 @@ namespace MyShopAPI.Controllers
                                 StreetNo = Convert.ToString(reader["StreetNo"]),
                                 Area = Convert.ToString(reader["Area"]),
                                 Landmark = Convert.ToString(reader["Landmark"]),
-                                City = Convert.ToString(reader["City"]),
-                                State = Convert.ToInt32(reader["State"]),
                                 IsDefault = Convert.ToBoolean(reader["IsDefault"])
                             });
                         }
@@ -75,82 +75,7 @@ namespace MyShopAPI.Controllers
             }
             return response;
         }
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("Saveaddress")]
-        public SaveAddressResponce Saveaddress([FromBody] Address adress)
-        {
-            // www.abc.com/api/Saddam/Saveaddress
-            SaveAddressResponce resp = new SaveAddressResponce();
-            try
-            {
-                if (adress.UserId <= 0)
-                {
-                    resp.Message = "user id is mandatory";
-                }
-                else if (string.IsNullOrEmpty(adress.FullName))
-                {
-                    resp.Message = "Full Name is mandatory";
-                }
-                else if (adress.Country <= 0)
-                {
-                    resp.Message = "Country is mandatory";
-                }
-                else if (string.IsNullOrEmpty(adress.MobileNumber))
-                {
-                    resp.Message = "Mobile is mandatory";
-                }
-                else
-                {
-                    // save
-                    using (var conn = GetConnection())
-                    {
-                        SqlCommand com = new SqlCommand("spAddress", conn);
-                        com.CommandType = CommandType.StoredProcedure;
-
-                        com.Parameters.AddWithValue("@Id", adress.Id);
-                        com.Parameters.AddWithValue("@UserId", adress.UserId);
-                        com.Parameters.AddWithValue("@FullName", adress.FullName);
-                        com.Parameters.AddWithValue("@Country", adress.Country);
-                        com.Parameters.AddWithValue("@MobileNumber", adress.MobileNumber);
-                        com.Parameters.AddWithValue("@PinCode", adress.PinCode);
-                        com.Parameters.AddWithValue("@HouseNo", adress.HouseNo);
-                        com.Parameters.AddWithValue("@StreetNo", adress.StreetNo);
-                        com.Parameters.AddWithValue("@Area", adress.Area);
-                        com.Parameters.AddWithValue("@Landmark", adress.Landmark);
-                        com.Parameters.AddWithValue("@City", adress.City);
-                        com.Parameters.AddWithValue("@state", adress.State);
-                        com.Parameters.AddWithValue("@IsDefault", adress.IsDefault);
-
-
-                        com.Parameters.Add("@ReturnParamater", SqlDbType.Int, 4);
-                        com.Parameters["@ReturnParamater"].Direction = ParameterDirection.Output;
-
-                        com.Parameters.Add("@Message", SqlDbType.NVarChar, 100);
-                        com.Parameters["@Message"].Direction = ParameterDirection.Output;
-
-                        conn.Open();
-                        int res = com.ExecuteNonQuery();
-                        if (res > 0)
-                        {
-                            resp.Message = com.Parameters["@Message"].Value.ToString();
-                            resp.IsValid = true;
-                            resp.AddressId = res;
-                        }
-                        else
-                        {
-                            resp.Message = com.Parameters["@Message"].Value.ToString();
-                        }
-                        conn.Close();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                resp.Message = ex.Message;
-            }
-            return resp;
-        }
-
+      
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("GetCategories")]

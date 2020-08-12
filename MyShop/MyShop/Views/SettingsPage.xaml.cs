@@ -17,11 +17,15 @@ namespace MyShop.Views
         public SettingsPage()
         {
             InitializeComponent();
+                      
+        }
+        protected override void OnAppearing()
+        {
             BindingContext = new SettingsPageViewModel(Navigation);
             if (GlobalVariables.user_role == 1)
             {
                 itemCreationStack.IsVisible = true;
-            }            
+            }
         }
     }
 }

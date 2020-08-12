@@ -57,7 +57,7 @@
                 <Label Text="₹" TextColor="Red" ></Label>
                 <Label Text="{Binding TotalPrice}" FontAttributes="Bold"  TextColor="Red"  FontSize="15"></Label>
             </StackLayout>
-            // Go to Procced to Checkout page 
+            
             <Button Text="Proceed to Checkout" Command="{Binding Proceed}" BackgroundColor="#2DCA71" HorizontalOptions="FillAndExpand"></Button>
 
 

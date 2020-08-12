@@ -19,7 +19,7 @@ namespace MyShop.Views
         {
             InitializeComponent();
              BindingContext = new LoginViewModel(Navigation);
-           // BindingContext = new ApiLoginPageViewModel(Navigation);
+            //BindingContext = new ApiLoginPageViewModel(Navigation);
         }
 
         

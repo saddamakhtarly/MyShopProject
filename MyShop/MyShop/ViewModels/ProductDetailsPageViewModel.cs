@@ -71,7 +71,8 @@ namespace MyShop.ViewModels
                     var resp = await new GlobalFunctions().SaveCart(cart);
                     if (resp.IsValid)
                     {
-                      await  Application.Current.MainPage.DisplayAlert("Message", "Item Add To Care", "Ok");
+                      await  Application.Current.MainPage.DisplayAlert("Message", "Item Add To Cart", "Ok");
+                        await Navigation.PopAsync();
                     }
                     else
                     {
