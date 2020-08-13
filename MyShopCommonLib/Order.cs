@@ -8,16 +8,17 @@ namespace MyShopCommonLib
     {
         public Order()
         {
-            ShipmentAddress = new Address();
+            //ShipmentAddress = new Address();
             Items = new List<CartItem>();
         }
-        public Address ShipmentAddress { get; set; }
+        // public Address ShipmentAddress { get; set; }
+        public int UserId { get; set; }
+        public int AddressId { get; set; }
         public List<CartItem> Items { get; set; }
         public decimal OrderAmount { get; set; }
         public decimal PaidAmount { get; set; }
         public decimal Discount { get; set; }
         public decimal ShippingCharge { get; set; }
-        public int UserId { get; set; }
         public int PaymentType { get; set; }//0=COD,1=Pay Now,2=Paypal
     }
     public class CreateOrderresponse : Response

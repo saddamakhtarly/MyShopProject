@@ -15,7 +15,7 @@ namespace MyShop.ViewModels
     {
         public INavigation Navigation { get; set; }
         Address addresess;
-        Address Selected_Address;
+        Address Selected_Address=new Address();
         ///string TotalPrice;
         ObservableCollection<CartItem> CartItems;
         public CheckOutPageViewModel(INavigation navigation, string totalqty, string totalprice, ObservableCollection<CartItem> Items)
@@ -40,7 +40,7 @@ namespace MyShop.ViewModels
                         MobileNumber = value.MobileNumber;
                         Street = value.StreetNo;
                         HouseNo = value.HouseNo;
-                        
+                        Selected_Address = value;          
                     });
                     await Navigation.PushAsync(new AddressListPage());
                 });
@@ -53,30 +53,21 @@ namespace MyShop.ViewModels
                 return new Command(async () =>
                 {
                     Order order = new Order();
-                    order.ShipmentAddress = new Address();
+                   // order.ShipmentAddress = new Address();
                     order.Items = new List<CartItem>();
                     order.UserId = GlobalVariables.user_id;
+                    order.AddressId = Selected_Address.Id;
+                   
 
-                    order.ShipmentAddress.Area = Selected_Address.Area;
-                    order.ShipmentAddress.CityName = Selected_Address.CityName;
-                    order.ShipmentAddress.CountryId = Selected_Address.CountryId;
-                    order.ShipmentAddress.FullName = Selected_Address.FullName;
-                    order.ShipmentAddress.HouseNo = Selected_Address.HouseNo;
-                    order.ShipmentAddress.Landmark = Selected_Address.Landmark;
-                    order.ShipmentAddress.MobileNumber = Selected_Address.MobileNumber;
-                    order.ShipmentAddress.PinCode = Selected_Address.PinCode;
-                    order.ShipmentAddress.StateId = Selected_Address.StateId;
-                    order.ShipmentAddress.StreetNo = Selected_Address.StreetNo;
-
-                    order.PaidAmount = 0;
-                    order.PaymentType = 1;
                     order.OrderAmount = CartItems.Sum(x => x.SalePrice * x.Quantity);
-                    order.ShippingCharge = 0;
-                    order.Items = CartItems.ToList();
+                    order.PaidAmount = 0;
                     order.Discount = 0;
-
+                    order.ShippingCharge = 0;
+                    order.PaymentType = 1;
+                    order.Items = CartItems.ToList();
+                    
                     var resp = await new GlobalFunctions().CreateOrder(order);
-                    //await Navigation.PushAsync(new OrderPage());
+                    await Navigation.PushAsync(new OrderPage());
                 });
             }
         }
