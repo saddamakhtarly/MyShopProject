@@ -1,15 +1,13 @@
 ﻿using MyShop.Models;
 using MyShopCommonLib;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace MyShop.ViewModels
 {
     public class OrderViewModel : NotifyModel
     {
-        INavigation Navigation;
+        public INavigation Navigation { get; set; }
+        Address Selected_Address = new Address();
         public OrderViewModel(INavigation navigation)
         {
             Navigation = navigation;

@@ -17,5 +17,15 @@ namespace MyShop.Views
             InitializeComponent();
             
         }
+
+        private async void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//views:FrontPage");
+        }
+
+        private async void MenuItem_Clicked_1(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//views:ProductsPage");
+        }
     }
 }

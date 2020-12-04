@@ -6,7 +6,10 @@
              mc:Ignorable="d" Title="My Shop"
              xmlns:views="clr-namespace:MyShop.Views"
              x:Class="MyShop.Views.HomePage">
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+   
+
+
+    <!--<FlyoutItem >
         <Tab Title="Home" Icon="homeIcon.png">
             <ShellContent>
                 <views:FrontPage/>
@@ -32,6 +35,25 @@
                 <views:SettingsPage/>
             </ShellContent>
         </Tab>
+    </FlyoutItem>-->
+    <FlyoutItem >
+        <ShellContent Title="FrontPage" Icon="aboutIcon.png" Route="FrontPage" ContentTemplate="{DataTemplate views:FrontPage}"  />
+        <ShellContent Title="ProductsPage" Icon="aboutIcon.png" Route="ProductsPage" ContentTemplate="{DataTemplate views:ProductsPage}" />
+        <ShellContent Title="CartPage" Icon="aboutIcon.png" Route="CartPage" ContentTemplate="{DataTemplate views:CartPage}" />
+        <ShellContent Title="AboutPage" Icon="aboutIcon.png" Route="AboutPage" ContentTemplate="{DataTemplate views:AboutPage}" />
+        <ShellContent Title="SettingsPage" Icon="aboutIcon.png" Route="SettingsPage" ContentTemplate="{DataTemplate views:SettingsPage}" />
     </FlyoutItem>
+    <MenuItem  Text="FrontPage"   Clicked="MenuItem_Clicked">
     
+    </MenuItem>
+    <MenuItem  Text="ProductsPage"  Clicked="MenuItem_Clicked_1">
+    </MenuItem>
+
+    <ShellContent Route="views:FrontPage" Title="FrontPage" ContentTemplate="{DataTemplate views:FrontPage}">
+
+    </ShellContent>
+    <ShellContent Route="views:ProductsPage" Title="ProductsPage" ContentTemplate="{DataTemplate views:ProductsPage}">
+        
+    </ShellContent>
+
 </Shell>

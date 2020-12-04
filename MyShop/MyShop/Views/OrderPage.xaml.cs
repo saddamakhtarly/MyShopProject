@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using MyShop.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +10,7 @@ namespace MyShop.Views
         public OrderPage()
         {
             InitializeComponent();
-            BindingContext = new MyShop.ViewModels.OrderViewModel(Navigation);
+            BindingContext = new OrderViewModel(Navigation);
         }
     }
 }

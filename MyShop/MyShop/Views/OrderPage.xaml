@@ -32,19 +32,6 @@
                         <Label x:Name="Pin" Text="{Binding PinCode}" TextColor="Black"/>
                     </StackLayout>
                 </StackLayout>
-
-                <!--<Label Text="Payment Information:" FontAttributes="Bold" FontSize="Medium" TextColor="Black"></Label>
-                <StackLayout  BackgroundColor="White" Padding="20" HorizontalOptions="FillAndExpand">
-                   
-                    <StackLayout Orientation="Horizontal">
-                        <Button x:Name="RazerPay" Command="{Binding RazerPaybtnClicked}" Clicked="RazerPay_Clicked" Image="radiobtnunchecked.png" Text="  Pay Pal" TextColor="Black" BackgroundColor="Transparent"  FontAttributes="Bold"  VerticalOptions="Center"/>
-                        <Image Source="paypal.png" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Button x:Name="Cod" Command="{Binding CodbtnClicked}" Clicked="Cod_Clicked" Image="radiobtnunchecked.png" Text="  Cash On Delivery" TextColor="Black"  BackgroundColor="Transparent" FontAttributes="Bold"  VerticalOptions="Center"/>
-                        <Image Source="cod.png" VerticalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>-->
                 <Button  Text="Confirm Order" Command="{Binding ConfirmOrder}" BackgroundColor="#2DCA71"  HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
         </ScrollView>

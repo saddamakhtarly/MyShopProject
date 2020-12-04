@@ -14,9 +14,7 @@ namespace MyShop.ViewModels
     public class CheckOutPageViewModel : NotifyModel
     {
         public INavigation Navigation { get; set; }
-        Address addresess;
         Address Selected_Address=new Address();
-        ///string TotalPrice;
         ObservableCollection<CartItem> CartItems;
         public CheckOutPageViewModel(INavigation navigation, string totalqty, string totalprice, ObservableCollection<CartItem> Items)
         {
@@ -25,7 +23,6 @@ namespace MyShop.ViewModels
             CartItems = Items;
             TotalPrice = totalprice;
         }
-
         public Command AddAddress
         {
             get
@@ -53,7 +50,6 @@ namespace MyShop.ViewModels
                 return new Command(async () =>
                 {
                     Order order = new Order();
-                   // order.ShipmentAddress = new Address();
                     order.Items = new List<CartItem>();
                     order.UserId = GlobalVariables.user_id;
                     order.AddressId = Selected_Address.Id;
@@ -70,37 +66,6 @@ namespace MyShop.ViewModels
                     await Navigation.PushAsync(new OrderPage());
                 });
             }
-        }
-        public async void ExecutePlaceOrderCommand()
-        {
-            // UserDialogs.Instance.ShowLoading();
-            //foreach (var item in cartList)
-            //{
-            //    item.Qty = 1;
-            //}
-            //Rest_Response rest_result = await WebService.PostData(cartList, "Product/PlaceOrder");
-            //if (rest_result != null)
-            //{
-            //    if (rest_result.status_code == 200)
-            //    {
-            //        await GetProduct();
-            //        RootObjectProduct data = JsonConvert.DeserializeObject<RootObjectProduct>(rest_result.response_body);
-            //        if (data.StatusCode == 200)
-            //        {
-            //            CrossLocalNotifications.Current.Show("ByMe", "Your Order has Been Placed worth Rs." + GetPrice());
-            //            cartList = new ObservableCollection<ProductModel>();
-            //        }
-
-            //    }
-            //    else
-            //    {
-            //        UserDialogs.Instance.Alert("User Already registered");
-            //    }
-
-            //}
-            //UserDialogs.Instance.HideLoading();
-
-
         }
         private bool CheckValidations()
         {
@@ -163,14 +128,11 @@ namespace MyShop.ViewModels
             get { return _countryId; }
             set
             {
-                if (value != null)
-                {
                     _countryId = value;
                     OnPropertyChanged();
-                }
+                
             }
         }
-        
         string _city;
         public string City
         {
@@ -220,7 +182,6 @@ namespace MyShop.ViewModels
                 }
             }
         }
-
         int _pinCode;
         public int PinCode
         {

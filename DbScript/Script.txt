@@ -1,0 +1,669 @@
+USE [master]
+GO
+/****** Object:  Database [MyShop]    Script Date: 12/4/2020 11:43:15 AM ******/
+CREATE DATABASE [MyShop]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'MyShop', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\MyShop.mdf' , SIZE = 4096KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'MyShop_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\MyShop_log.ldf' , SIZE = 1792KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [MyShop] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [MyShop].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [MyShop] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [MyShop] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [MyShop] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [MyShop] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [MyShop] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [MyShop] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [MyShop] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [MyShop] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [MyShop] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [MyShop] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [MyShop] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [MyShop] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [MyShop] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [MyShop] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [MyShop] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [MyShop] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [MyShop] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [MyShop] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [MyShop] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [MyShop] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [MyShop] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [MyShop] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [MyShop] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [MyShop] SET  MULTI_USER 
+GO
+ALTER DATABASE [MyShop] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [MyShop] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [MyShop] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [MyShop] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [MyShop] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'MyShop', N'ON'
+GO
+ALTER DATABASE [MyShop] SET QUERY_STORE = OFF
+GO
+USE [MyShop]
+GO
+/****** Object:  User [NT AUTHORITY\NETWORK SERVICE]    Script Date: 12/4/2020 11:43:15 AM ******/
+CREATE USER [NT AUTHORITY\NETWORK SERVICE] FOR LOGIN [NT AUTHORITY\NETWORK SERVICE] WITH DEFAULT_SCHEMA=[db_owner]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [NT AUTHORITY\NETWORK SERVICE]
+GO
+/****** Object:  Table [dbo].[tblAddress]    Script Date: 12/4/2020 11:43:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblAddress](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[CountryId] [int] NOT NULL,
+	[StateId] [int] NOT NULL,
+	[CityName] [nvarchar](100) NULL,
+	[FullName] [nvarchar](100) NOT NULL,
+	[MobileNumber] [nvarchar](50) NOT NULL,
+	[PINCode] [nvarchar](8) NULL,
+	[HouseNo] [nvarchar](100) NULL,
+	[StreetNo] [nvarchar](100) NULL,
+	[Area] [nvarchar](100) NULL,
+	[Landmark] [nvarchar](100) NULL,
+	[IsDefault] [bit] NULL,
+ CONSTRAINT [PK_tblAddress] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCart]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCart](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+ CONSTRAINT [PK_tblCart] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblCategory]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblCategory](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_tblCategory] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblOrder]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[AddressId] [int] NOT NULL,
+	[OrderNo] [nvarchar](20) NOT NULL,
+	[OrderAmount] [decimal](18, 2) NOT NULL,
+	[PaidAmount] [decimal](18, 2) NOT NULL,
+	[Discount] [decimal](18, 2) NOT NULL,
+	[ShippingCharge] [decimal](18, 2) NOT NULL,
+	[Date] [date] NOT NULL,
+	[Time] [time](7) NOT NULL,
+	[PaymentType] [int] NOT NULL,
+ CONSTRAINT [PK_tblOrder] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblOrderItem]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblOrderItem](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[OrderId] [int] NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[Name] [nvarchar](80) NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[MRP] [decimal](18, 2) NOT NULL,
+	[SellPrice] [decimal](18, 2) NOT NULL,
+	[Description] [nvarchar](50) NULL,
+	[ThumbnailURL] [nvarchar](max) NULL,
+ CONSTRAINT [PK_tblOrderItem] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblProduct]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblProduct](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](80) NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[MRP] [decimal](18, 2) NOT NULL,
+	[SellPrice] [decimal](18, 2) NOT NULL,
+	[Description] [nvarchar](500) NULL,
+	[ThumbnailURL] [nvarchar](max) NULL,
+ CONSTRAINT [PK_tblProduct] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblProductImage]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblProductImage](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ProductId] [int] NOT NULL,
+	[ImageURL] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_tblProductImage] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tblUser]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tblUser](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FullName] [nvarchar](50) NOT NULL,
+	[Mobile] [nvarchar](50) NOT NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
+	[Role] [int] NULL,
+ CONSTRAINT [PK_tblUser] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_CreateOrder]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_CreateOrder]
+@UserId int,
+@AddressId int,
+@OrderNo NVARCHAR(20),
+@OrderAmount decimal(8,2),
+@PaidAmount decimal(8,2),
+@Discount decimal(8,2),
+@ShippingCharge decimal(8,2),
+@PaymentType int,
+
+@Date date,
+@Time time,
+@ReturnParamater int output,
+@ReturnOrderNo NVARCHAR(20) output
+AS 
+BEGIN
+	INSERT INTO [dbo].[tblOrder]
+           ([UserId],AddressId,[OrderNo],[OrderAmount],[PaidAmount],[Discount],[ShippingCharge],[PaymentType],[Date]
+           ,[Time])
+     VALUES
+           (@UserId,@AddressId,@OrderNo,@OrderAmount,@PaidAmount,@Discount,@ShippingCharge,@PaymentType,@Date,@Time)
+	SET @ReturnParamater = SCOPE_IDENTITY()
+	SET @ReturnOrderNo = @OrderNo
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetCart]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create Proc [dbo].[Sp_GetCart]
+@UserId INT= 0
+AS
+Begin
+select cr.Id as CartId, cr.ProductId, cr.Quantity ,pr.Name,pr.MRP,pr.SellPrice,
+(SELECT TOP 1 ImageURL FROM tblProductImage tblpi WHERE tblpi.ProductId = cr.ProductId) AS ThumbnailURL
+from tblCart as cr left join tblProduct as pr on pr.Id = cr.ProductId
+where cr.UserId = @UserId
+End
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetCategories]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_GetCategories]
+AS
+BEGIN
+	SELECT * FROM tblCategory
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetOrderDetails]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROc [dbo].[Sp_GetOrderDetails]
+@OrderId int
+AS
+BEGIN
+	SELECT * FROM tblOrder WHERE Id=@OrderId
+	SELECT * FROM tblOrderItem  WHERE OrderId = @OrderId
+	SELECT * FROM tblShippingAddress WHERE OrderId = @OrderId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetOrders]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[Sp_GetOrders]
+@UserId int
+as
+begin 
+Select OrderNo, [Date] , Id , OrderAmount from tblOrder
+where UserId = @UserId
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetProductImage]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[Sp_GetProductImage]
+@ProductId int
+as
+begin
+select * from tblProductImage where ProductId=@ProductId
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetProducts]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_GetProducts]
+@CategoryId INT=0
+AS
+BEGIN
+	IF @CategoryId = 0	
+	BEGIN
+		SELECT Id,Name,CategoryId,MRP,SellPrice,[Description],
+		(SELECT TOP 1 ImageURL FROM tblProductImage tblpi WHERE tblpi.ProductId = p.Id) AS ThumbnailURL
+		FROM tblProduct p
+	END
+	ELSE
+	BEGIN
+		SELECT Id,Name,CategoryId,MRP,SellPrice,[Description],
+		(SELECT TOP 1 ImageURL FROM tblProductImage tblpi WHERE tblpi.ProductId = p.Id) AS ThumbnailURL
+		FROM tblProduct p
+		WHERE p.CategoryId = @CategoryId
+	END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_GetSearchProducts]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_GetSearchProducts]
+@Keyword nvarchar(100) = ''
+AS
+BEGIN
+
+   IF @Keyword is  null 
+	BEGIN
+		SELECT Id,Name,CategoryId,MRP,SellPrice,[Description],
+		(SELECT TOP 1 ImageURL FROM tblProductImage tblpi WHERE tblpi.ProductId = p.Id) AS ThumbnailURL
+		FROM tblProduct p
+	END
+	ELSE
+	BEGIN
+		SELECT Id,Name,CategoryId,MRP,SellPrice,[Description],
+		(SELECT TOP 1 ImageURL FROM tblProductImage tblpi WHERE tblpi.ProductId = p.Id) AS ThumbnailURL
+		FROM tblProduct p
+		WHERE p.Name LIKE '%'+@Keyword+'%' OR  p.Description LIKE '%'+@Keyword+'%' 
+	END
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_RegisterUser]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_RegisterUser]
+@Id int,
+@FullName nvarchar(50),
+@Email nvarchar(50),
+@Mobile nvarchar(50),
+@Password nvarchar(50),
+@RoleId int,
+@ReturnParamater int output,
+@Message nvarchar(50) output
+AS
+BEGIN
+	DECLARE @Count INT
+	SET @Count = (SELECT COUNT(Id) FROM tblUser WHERE Email= @Email OR Mobile = @Mobile)
+	IF @Count = 0
+	BEGIN
+		INSERT INTO [dbo].[tblUser]
+			   ([FullName],[Email],[Mobile],[Password],[Role])
+		 VALUES
+			   (@FullName,@Email,@Mobile,@Password,@RoleId)
+		SET @ReturnParamater = SCOPE_IDENTITY()
+		SET @Message = 'User Created Successfully'
+	END
+	ELSE
+	BEGIN
+		SET @ReturnParamater = -1
+		SET @Message = 'User Already Created With Same Email Or Mobile'
+	END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_SaveCart]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_SaveCart]
+@Id INT,
+@ProductId INT,
+@UserId INT,
+@Quantity INT,
+@ReturnParamater INT OUTPUT,
+@Message NVARCHAR(100) OUTPUT
+AS
+BEGIN
+	DECLARE @Count INT
+	SET @Count = (SELECT COUNT(Id) FROM tblCart WHERE UserId=@UserId AND ProductId = @ProductId)
+	IF @Count = 0
+	BEGIN
+		-- insert cart item
+		INSERT INTO [dbo].[tblCart]
+           ([ProductId]
+           ,[Quantity]
+           ,[UserId])
+		VALUES
+           (@ProductId,@Quantity,@UserId)
+
+		SET @ReturnParamater = SCOPE_IDENTITY()
+	END
+	ELSE
+	BEGIN
+		--UPDATE CART
+		DECLARE @Qty INT
+		SET @Qty = (SELECT Quantity FROM tblCart WHERE UserId=@UserId AND ProductId = @ProductId)
+		if @Qty=0
+		begin
+		delete  FROM tblCart WHERE UserId=@UserId AND ProductId = @ProductId
+		end
+		DECLARE @TotalQty INT
+		SET @TotalQty = @Qty + @Quantity
+		
+		
+		UPDATE tblCart 
+		SET [Quantity] = @TotalQty
+		WHERE UserId=@UserId AND ProductId = @ProductId
+		SET @ReturnParamater = @Id
+	END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_SaveCategory]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_SaveCategory]
+@Name nvarchar(50),
+@ReturnParamater INT OUTPUT,
+@Message NVARCHAR(50) OUTPUT
+AS
+BEGIN
+	DECLARE @Count int
+	SET @Count = (SELECT Count(Id) FROM tblCategory WHERE Name = @Name)
+	IF @Count = 0
+	BEGIN
+		INSERT INTO [dbo].[tblCategory]
+		(Name) VALUES (@Name)
+		SET @ReturnParamater = SCOPE_IDENTITY()
+		SET @Message = 'Category Created'
+	END
+	ELSE
+	BEGIN
+		SET @ReturnParamater = -1
+		SET @Message = 'Category Already Exist'
+	END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_SaveOrderItem]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_SaveOrderItem]
+@OrderId int,
+@ProductId int,
+@Quantity int,
+@ReturnParamater int output
+AS
+BEGIN
+	DECLARE @Name Nvarchar(80)
+	SET @Name = (SELECT Name FROM tblProduct WHERE Id = @ProductId)
+
+	DECLARE @MRP decimal(18,2)
+	SET @MRP = (SELECT MRP FROM tblProduct WHERE Id = @ProductId)
+
+	DECLARE @SellPrice decimal(18,2)
+	SET @SellPrice = (SELECT SellPrice FROM tblProduct WHERE Id = @ProductId)
+
+	DECLARE @Description Nvarchar(50)
+	SET @Description = (SELECT Description FROM tblProduct WHERE Id = @ProductId)
+
+	DECLARE @ThumbnailURL Nvarchar(max)
+	SET @ThumbnailURL = (SELECT TOP 1 ImageURL FROM tblProductImage tblpi WHERE tblpi.ProductId = @ProductId)
+
+	INSERT INTO [dbo].[tblOrderItem]
+           ([OrderId],[ProductId],[Name],[Quantity],[MRP],[SellPrice],[Description],[ThumbnailURL])
+     VALUES
+           (@OrderId,@ProductId,@Name,@Quantity,@MRP,@SellPrice,@Description,@ThumbnailURL)
+
+	SET @ReturnParamater = SCOPE_IDENTITY()
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_SaveProduct]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_SaveProduct]
+@Id int ,
+@Name nvarchar(80),
+@CategoryId int,
+@MRP decimal,
+@SellPrice decimal,
+@Description nvarchar(500),
+@ReturnParamater int Output,
+@Message nvarchar(50) Output
+AS 
+BEGIN
+	IF @Id=0 
+	BEGIN
+		INSERT INTO tblProduct 
+		(Name,CategoryId,MRP,SellPrice,[Description])
+		VALUES
+		(@Name,@CategoryId,@MRP,@SellPrice,@Description)
+		SET @ReturnParamater=SCOPE_IDENTITY()
+		SET @Message = 'Product Created Successfully'
+	END
+	ELSE
+	BEGIN
+		UPDATE tblProduct 
+		SET Name=@Name,CategoryId=@CategoryId,MRP=@MRP,SellPrice=@SellPrice,[Description]=@Description
+		SET @ReturnParamater=@Id
+		SET @Message = 'Product Updated Successfully'
+	END
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_SaveProductImage]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_SaveProductImage]
+@Id int ,
+@ProductId int,
+@ImageURL nvarchar(Max),
+@ReturnParamater int Output,
+@Message nvarchar(50) Output
+AS 
+BEGIN
+	IF @Id=0 
+	BEGIN
+		INSERT INTO tblProductImage 
+		(ProductId,ImageURL)
+		VALUES
+		(@ProductId,@ImageURL)
+		SET @ReturnParamater=SCOPE_IDENTITY()
+		SET @Message = 'Product Images Created Successfully'
+	END
+	ELSE
+	BEGIN
+		UPDATE tblProductImage 
+		SET ProductId=@ProductId,ImageURL=@ImageURL
+		Where ProductId=@ProductId
+		SET @ReturnParamater=@Id
+		SET @Message = 'Product Images Updated Successfully'
+	END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_ValidateUser]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[Sp_ValidateUser]
+@Username nvarchar(50),
+@Password nvarchar(50)
+AS
+BEGIN
+	SELECT * FROM tblUser
+	WHERE Password = @Password AND (Mobile = @Username OR Email = @Username)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spAddress]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[spAddress]
+@Id int,
+@UserId INT,
+@CountryId int,
+@StateId int,
+@CityName nvarchar (100),
+@FullName nvarchar (100),
+@MobileNumber nvarchar (50),
+@PinCode nvarchar (8),
+@HouseNo nvarchar (100),
+@StreetNo nvarchar (100),
+@Area nvarchar (100),
+@Landmark nvarchar (100),
+@IsDefault bit,
+@ReturnParamater int Output,
+@Message nvarchar(50) Output
+AS
+BEGIN
+IF @Id=0 
+	BEGIN
+		INSERT INTO tblAddress 
+		(UserId,CountryId,[StateId],CityName,FullName,MobileNumber,PINCode,HouseNo,StreetNo,Area,Landmark,IsDefault)
+		VALUES
+		(@UserId,@CountryId,@StateId,@CityName,@FullName,@MobileNumber,@PinCode,@HouseNo,@StreetNo,@Area,@Landmark,@IsDefault)
+		SET @ReturnParamater=SCOPE_IDENTITY()
+		SET @Message = 'Address Created Successfully'
+		END
+		Else
+		BEGIN
+		UPDATE tblAddress
+		SET CountryId=@CountryId,[StateId]=@StateId,CityName=@CityName,FullName=@FullName,MobileNumber=@MobileNumber,PINCode=@PinCode,HouseNo=@HouseNo,StreetNo=@StreetNo,Area=@Area,Landmark=@Landmark,IsDefault=@IsDefault
+		where Id=@Id
+		SET @ReturnParamater=@Id
+		SET @Message = 'Address Updated Successfully'
+	END
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SpGetAddress]    Script Date: 12/4/2020 11:43:16 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROC [dbo].[SpGetAddress]
+@UserId nvarchar(50)
+as
+Begin
+select * from tblAddress where UserId = @UserId
+
+end
+GO
+USE [master]
+GO
+ALTER DATABASE [MyShop] SET  READ_WRITE 
+GO
